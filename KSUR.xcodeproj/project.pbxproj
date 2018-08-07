@@ -7,14 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93F921068BAD0016114F /* StringSizeExtension.swift */; };
+		C32D93FD210690CC0016114F /* TimetableLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */; };
+		C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FE210693680016114F /* WeekConstructorService.swift */; };
 		C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25322103F95F00FBEF53 /* AppDelegate.swift */; };
-		C35B25352103F95F00FBEF53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25342103F95F00FBEF53 /* ViewController.swift */; };
 		C35B25382103F95F00FBEF53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B25362103F95F00FBEF53 /* Main.storyboard */; };
-		C35B253B2103F95F00FBEF53 /* KSUR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C35B25392103F95F00FBEF53 /* KSUR.xcdatamodeld */; };
 		C35B253D2103F96000FBEF53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35B253C2103F96000FBEF53 /* Assets.xcassets */; };
 		C35B25402103F96000FBEF53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B253E2103F96000FBEF53 /* LaunchScreen.storyboard */; };
 		C35B254B2103F96000FBEF53 /* KSURTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B254A2103F96000FBEF53 /* KSURTests.swift */; };
 		C35B25562103F96000FBEF53 /* KSURUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25552103F96000FBEF53 /* KSURUITests.swift */; };
+		C35B25642103FDAE00FBEF53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25632103FDAE00FBEF53 /* ViewController.swift */; };
+		C35B25662103FE0300FBEF53 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25652103FE0300FBEF53 /* Configurator.swift */; };
+		C35B25692103FF1300FBEF53 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25682103FF1300FBEF53 /* Presenter.swift */; };
+		C38765BC210F447300987C25 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BB210F447300987C25 /* TableView.swift */; };
+		C38765BE210F44BE00987C25 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BD210F44BE00987C25 /* CollectionView.swift */; };
+		C39B330D2107360F0008370E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330C2107360F0008370E /* Day.swift */; };
+		C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330E2107399C0008370E /* DayConstructorService.swift */; };
+		C39B331121073A290008370E /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331021073A290008370E /* Lesson.swift */; };
+		C39B331321073AB30008370E /* TimetableDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331221073AB30008370E /* TimetableDayCollectionViewCell.swift */; };
+		C3A15EF62113AAAD0056C8BB /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */; };
+		C3CEE448211911CA00CF6846 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */; };
+		C3CEE44B211912F900CF6846 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44A211912F900CF6846 /* APIService.swift */; };
+		C3CEE44D2119171100CF6846 /* week.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44C2119171100CF6846 /* week.pb.swift */; };
+		C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44E21191DC000CF6846 /* DeserializerService.swift */; };
+		C3CFC3C82104015300A999A4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C72104015300A999A4 /* Router.swift */; };
+		C3CFC3CA2104021100A999A4 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C92104021100A999A4 /* Interactor.swift */; };
+		C3DFCAFC210A040800EAA5AF /* RenderedImageTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DFCAFB210A040800EAA5AF /* RenderedImageTableViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,11 +53,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C32D93F921068BAD0016114F /* StringSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSizeExtension.swift; sourceTree = "<group>"; };
+		C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonTableViewCell.swift; sourceTree = "<group>"; };
+		C32D93FE210693680016114F /* WeekConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekConstructorService.swift; sourceTree = "<group>"; };
 		C35B252F2103F95F00FBEF53 /* KSUR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSUR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B25322103F95F00FBEF53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C35B25342103F95F00FBEF53 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C35B25372103F95F00FBEF53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C35B253A2103F95F00FBEF53 /* KSUR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KSUR.xcdatamodel; sourceTree = "<group>"; };
 		C35B253C2103F96000FBEF53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C35B253F2103F96000FBEF53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C35B25412103F96000FBEF53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +68,23 @@
 		C35B25512103F96000FBEF53 /* KSURUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSURUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B25552103F96000FBEF53 /* KSURUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSURUITests.swift; sourceTree = "<group>"; };
 		C35B25572103F96000FBEF53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C35B25632103FDAE00FBEF53 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C35B25652103FE0300FBEF53 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
+		C35B25682103FF1300FBEF53 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		C38765BB210F447300987C25 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		C38765BD210F44BE00987C25 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionView.swift; path = Entities/CollectionView.swift; sourceTree = "<group>"; };
+		C39B330C2107360F0008370E /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		C39B330E2107399C0008370E /* DayConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayConstructorService.swift; sourceTree = "<group>"; };
+		C39B331021073A290008370E /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		C39B331221073AB30008370E /* TimetableDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
+		C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
+		C3CEE44A211912F900CF6846 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		C3CEE44C2119171100CF6846 /* week.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = week.pb.swift; path = Proto/week.pb.swift; sourceTree = SOURCE_ROOT; };
+		C3CEE44E21191DC000CF6846 /* DeserializerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializerService.swift; sourceTree = "<group>"; };
+		C3CFC3C72104015300A999A4 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		C3CFC3C92104021100A999A4 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		C3DFCAFB210A040800EAA5AF /* RenderedImageTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedImageTableViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CEE448211911CA00CF6846 /* SwiftProtobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C32D93FB21068BBB0016114F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C32D93F921068BAD0016114F /* StringSizeExtension.swift */,
+				C3DFCAFB210A040800EAA5AF /* RenderedImageTableViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C35B25262103F95F00FBEF53 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +129,7 @@
 				C35B25492103F96000FBEF53 /* KSURTests */,
 				C35B25542103F96000FBEF53 /* KSURUITests */,
 				C35B25302103F95F00FBEF53 /* Products */,
+				C3CEE446211911CA00CF6846 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +146,14 @@
 		C35B25312103F95F00FBEF53 /* KSUR */ = {
 			isa = PBXGroup;
 			children = (
+				C3CEE44C2119171100CF6846 /* week.pb.swift */,
 				C35B25322103F95F00FBEF53 /* AppDelegate.swift */,
-				C35B25342103F95F00FBEF53 /* ViewController.swift */,
 				C35B25362103F95F00FBEF53 /* Main.storyboard */,
 				C35B253C2103F96000FBEF53 /* Assets.xcassets */,
 				C35B253E2103F96000FBEF53 /* LaunchScreen.storyboard */,
 				C35B25412103F96000FBEF53 /* Info.plist */,
-				C35B25392103F95F00FBEF53 /* KSUR.xcdatamodeld */,
+				C35B25672103FEF500FBEF53 /* Timetable */,
+				C32D93FB21068BBB0016114F /* Extensions */,
 			);
 			path = KSUR;
 			sourceTree = "<group>";
@@ -128,6 +176,53 @@
 			path = KSURUITests;
 			sourceTree = "<group>";
 		};
+		C35B25672103FEF500FBEF53 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				C35B25632103FDAE00FBEF53 /* ViewController.swift */,
+				C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */,
+				C38765BD210F44BE00987C25 /* CollectionView.swift */,
+				C38765BB210F447300987C25 /* TableView.swift */,
+				C35B25652103FE0300FBEF53 /* Configurator.swift */,
+				C35B25682103FF1300FBEF53 /* Presenter.swift */,
+				C3CFC3C72104015300A999A4 /* Router.swift */,
+				C3CFC3C92104021100A999A4 /* Interactor.swift */,
+				C36AC8A72107EF5D007991A5 /* Services */,
+				C36AC8A82107EF70007991A5 /* Entities */,
+			);
+			path = Timetable;
+			sourceTree = "<group>";
+		};
+		C36AC8A72107EF5D007991A5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C32D93FE210693680016114F /* WeekConstructorService.swift */,
+				C39B330E2107399C0008370E /* DayConstructorService.swift */,
+				C3CEE44A211912F900CF6846 /* APIService.swift */,
+				C3CEE44E21191DC000CF6846 /* DeserializerService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C36AC8A82107EF70007991A5 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */,
+				C39B331221073AB30008370E /* TimetableDayCollectionViewCell.swift */,
+				C39B331021073A290008370E /* Lesson.swift */,
+				C39B330C2107360F0008370E /* Day.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		C3CEE446211911CA00CF6846 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +233,8 @@
 				C35B252B2103F95F00FBEF53 /* Sources */,
 				C35B252C2103F95F00FBEF53 /* Frameworks */,
 				C35B252D2103F95F00FBEF53 /* Resources */,
+				C3AF8D162110814F00E35631 /* ShellScript */,
+				C3CEE449211911E800CF6846 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -254,14 +351,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C3AF8D162110814F00E35631 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export REVEAL_SERVER_FILENAME=\"RevealServer.framework\"\n\n# Update this path to point to the location of RevealServer.framework in your project.\nexport REVEAL_SERVER_PATH=\"${SRCROOT}/${REVEAL_SERVER_FILENAME}\"\n\n# If configuration is not Debug, skip this script.\n[ \"${CONFIGURATION}\" != \"Debug\" ] && exit 0\n\n# If RevealServer.framework exists at the specified path, run code signing script.\nif [ -d \"${REVEAL_SERVER_PATH}\" ]; then\n\"${REVEAL_SERVER_PATH}/Scripts/copy_and_codesign_revealserver.sh\"\nelse\necho \"Reveal Server not loaded: RevealServer.framework could not be found.\"\nfi\n";
+		};
+		C3CEE449211911E800CF6846 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftProtobuf.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftProtobuf.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C35B252B2103F95F00FBEF53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C35B25352103F95F00FBEF53 /* ViewController.swift in Sources */,
+				C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */,
+				C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */,
+				C3CFC3C82104015300A999A4 /* Router.swift in Sources */,
+				C38765BE210F44BE00987C25 /* CollectionView.swift in Sources */,
+				C3CEE44D2119171100CF6846 /* week.pb.swift in Sources */,
+				C35B25662103FE0300FBEF53 /* Configurator.swift in Sources */,
 				C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */,
-				C35B253B2103F95F00FBEF53 /* KSUR.xcdatamodeld in Sources */,
+				C3A15EF62113AAAD0056C8BB /* ViewControllerProtocol.swift in Sources */,
+				C3DFCAFC210A040800EAA5AF /* RenderedImageTableViewExtension.swift in Sources */,
+				C3CFC3CA2104021100A999A4 /* Interactor.swift in Sources */,
+				C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */,
+				C35B25692103FF1300FBEF53 /* Presenter.swift in Sources */,
+				C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */,
+				C35B25642103FDAE00FBEF53 /* ViewController.swift in Sources */,
+				C39B331321073AB30008370E /* TimetableDayCollectionViewCell.swift in Sources */,
+				C39B331121073A290008370E /* Lesson.swift in Sources */,
+				C39B330D2107360F0008370E /* Day.swift in Sources */,
+				C32D93FD210690CC0016114F /* TimetableLessonTableViewCell.swift in Sources */,
+				C3CEE44B211912F900CF6846 /* APIService.swift in Sources */,
+				C38765BC210F447300987C25 /* TableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,15 +589,28 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y7BEBZQYA6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = KSUR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					"-weak_framework",
+					RevealServer,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.KSUR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -454,6 +620,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y7BEBZQYA6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KSUR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -462,7 +632,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.KSUR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -588,19 +758,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		C35B25392103F95F00FBEF53 /* KSUR.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C35B253A2103F95F00FBEF53 /* KSUR.xcdatamodel */,
-			);
-			currentVersion = C35B253A2103F95F00FBEF53 /* KSUR.xcdatamodel */;
-			path = KSUR.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C35B25272103F95F00FBEF53 /* Project object */;
 }
