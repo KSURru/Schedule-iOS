@@ -68,6 +68,9 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
         dayCell.frame.size = CGSize(width: width + 32, height: 68)
         dayCell.backgroundColor = UIColor(white: 0.05, alpha: 1)
         
+        dayCell.titleLabel = titleLabel
+        dayCell.dateLabel = dateLabel
+        
         dayCell.addSubview(titleLabel)
         dayCell.addSubview(dateLabel)
         dayCell.isUserInteractionEnabled = false

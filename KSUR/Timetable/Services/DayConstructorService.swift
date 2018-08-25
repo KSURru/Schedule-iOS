@@ -199,9 +199,10 @@ class DayConstructorService: DayConstructorServiceProtocol {
     }
     
     func dayFrame(atIndex: Int, setFrame: UIImage?) {
-        guard let day = days[atIndex] else { return }
         
-        days[atIndex]!.frame = setFrame
+        if atIndex < days.count {
+            days[atIndex]!.frame = setFrame
+        }
     }
     
     func constructCells() {
@@ -236,134 +237,11 @@ class DayConstructorService: DayConstructorServiceProtocol {
         
         self.apiService = api
         
-        guard let week = apiService.getWeek(group: 0, even: 0) else { return }
+        guard let week = apiService.getWeek(group: 0, even: false) else { return }
         
         days = week
         
         self.constructCells()
     }
     
-//    var days: [LessonsDayProtocol?] = [
-//        LessonsDay(
-//            id: 0,
-//            title: "Понедельник",
-//            sections: [
-//                LessonsSection(
-//                    id: 0,
-//                    header: LessonsSectionHeader("1 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Элективные дисциплины по физической культуре и спорту", subtitle: "Спортивный зал", time: "9:00 – 10:30", professor: "Преподаватель кафедры", type: "Практика")
-//                    ]
-//                ),
-//                LessonsSection(
-//                    id: 1,
-//                    header: LessonsSectionHeader("2 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Элективные дисциплины по физической культуре и спорту", subtitle: "Спортивный зал", time: "10:40 – 12:10", professor: "Преподаватель кафедры", type: "Практика")
-//                    ]
-//                )
-//            ]
-//        ),
-//        LessonsDay(
-//            id: 1,
-//            title: "Вторник",
-//            sections: [
-//                LessonsSection(
-//                    id: 0,
-//                    header: LessonsSectionHeader("1 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Сетевые технологии", subtitle: "Аудитория 1611", time: "9:00 – 10:30", professor: "Стрельников Б.А.", type: "Лекция")
-//                    ]
-//                ),
-//                LessonsSection(
-//                    id: 1,
-//                    header: LessonsSectionHeader("2 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Сетевые технологии", subtitle: "Аудитория 1226", time: "10:40 – 12:10", professor: "Стрельников Б.А.", type: "Лабораторная")
-//                    ]
-//                ),
-//                LessonsSection(
-//                    id: 2,
-//                    header: LessonsSectionHeader("3 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Математические методы обработки статистических данных", subtitle: "Аудитория 1818", time: "12:40 - 14:10", professor: "Севастьянов П.А.", type: "Лекция")
-//                    ]
-//                )
-//            ]
-//        ),
-//        LessonsDay(
-//            id: 2,
-//            title: "Среда",
-//            sections: [
-//                LessonsSection(
-//                    id: 0,
-//                    header: LessonsSectionHeader("1 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Базы данных", subtitle: "Аудитория 1818", time: "9:00 – 10:30", professor: "Монахов В.И.", type: "Лекция")
-//                    ]
-//                ),
-////                LessonsSection(
-////                    id: 1,
-////                    header: LessonsSectionHeader("2 пара"),
-////                    lessons: [
-////                        Lesson(id: 0, title: "Базы данных", subtitle: "Аудитория 1343", time: "10:40 – 12:10", professor: "Монахов В.И.", type: "Лабораторная")
-////                    ]
-////                ),
-////                LessonsSection(
-////                    id: 2,
-////                    header: LessonsSectionHeader("3 пара"),
-////                    lessons: [
-////                        Lesson(id: 0, title: "Теория автоматического управления", subtitle: "Аудитория 1802", time: "12:40 - 14:10", professor: "Годунов М.В.", type: "Лекция")
-////                    ]
-////                )
-//            ]
-//        ),
-//        LessonsDay(
-//            id: 3,
-//            title: "Четверг",
-//            sections: [
-//                LessonsSection(
-//                    id: 0,
-//                    header: LessonsSectionHeader("1 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Информационное моделирование", subtitle: "Аудитория 1125", time: "9:00 – 10:30", professor: "Монахов В.И.", type: "Лекция")
-//                    ]
-//                ),
-//                LessonsSection(
-//                    id: 1,
-//                    header: LessonsSectionHeader("2 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Информационное моделирование", subtitle: "Аудитория 1343", time: "10:40 – 12:10", professor: "Монахов В.И.", type: "Лабораторная")
-//                    ]
-//                )
-//            ]
-//        ),
-//        LessonsDay(
-//            id: 4,
-//            title: "Пятница",
-//            sections: [
-//                LessonsSection(
-//                    id: 0,
-//                    header: LessonsSectionHeader("1 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "Элективные дисциплины по физической культуре и спорту", subtitle: "Спортивный зал", time: "9:00 – 10:30", professor: "Преподаватель кафедры", type: "Практика")
-//                    ]
-//                ),
-//                LessonsSection(
-//                    id: 1,
-//                    header: LessonsSectionHeader("2 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "ЭВМ и периферийные устройства", subtitle: "Аудитория 1125", time: "10:40 – 12:10", professor: "Беспалов М.Е.", type: "Лекция")
-//                    ]
-//                ),
-//                LessonsSection(
-//                    id: 2,
-//                    header: LessonsSectionHeader("3 пара"),
-//                    lessons: [
-//                        Lesson(id: 0, title: "ЭВМ и периферийные устройства", subtitle: "Аудитория 1125", time: "12:40 - 14:10", professor: "Беспалов М.Е.", type: "Лабораторная")
-//                    ]
-//                )
-//            ]
-//        )
-//    ]
 }

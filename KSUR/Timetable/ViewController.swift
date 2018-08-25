@@ -47,6 +47,7 @@ class TimetableViewController: UIViewController {
         
         weekCollectionView.delegate = self
         weekCollectionView.dataSource = self
+        weekCollectionView.register(TimetableDayCollectionViewCell.self, forCellWithReuseIdentifier: "dayCell")
         weekCollectionView.backgroundColor = UIColor(white: 0.05, alpha: 1)
         
         renderedPrevImageView.backgroundColor = UIColor(white: 0.05, alpha: 1)

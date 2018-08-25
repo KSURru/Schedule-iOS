@@ -9,4 +9,9 @@
 
 import UIKit
 
-class TimetableDayCollectionViewCell: UICollectionViewCell { }
+class TimetableDayCollectionViewCell: UICollectionViewCell {
+    
+    var titleLabel: UILabel!
+    var dateLabel: UILabel!
+    
+}

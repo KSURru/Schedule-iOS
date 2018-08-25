@@ -38,7 +38,8 @@ class TimetableInteractor: TimetableInteractorProtocol {
         self.presenter = presenter
         
         deserializerService = DeserializerService()
-        apiService = APIService(host: "0.0.0.0", port: 8081, version: 1, deserializer: deserializerService)
+        apiService = APIService(host: "34.218.231.22", port: 8081, version: 1, deserializer: deserializerService)
+//        apiService = APIService(host: "0.0.0.0", port: 8081, version: 1, deserializer: deserializerService) // local
         weekConstructorService = WeekConstructorService()
         dayConstructorService = DayConstructorService(api: apiService)
     }

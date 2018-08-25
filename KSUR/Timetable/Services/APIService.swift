@@ -17,7 +17,7 @@ protocol APIServiceProtocol: class {
     var port: Int { get }
     var version: Int { get }
     
-    func getWeek(group: Int, even: Int) -> [LessonsDayProtocol?]?
+    func getWeek(group: Int, even: Bool) -> [LessonsDayProtocol?]?
     
 }
 
@@ -39,7 +39,7 @@ class APIService: APIServiceProtocol {
         
     }
     
-    func getWeek(group: Int, even: Int) -> [LessonsDayProtocol?]? {
+    func getWeek(group: Int, even: Bool) -> [LessonsDayProtocol?]? {
         
         let urlString = "http://\(host):\(port)/v\(version)/groups/\(group)/weeks/\(even)"
         guard let url = URL(string: urlString) else { return nil }

@@ -84,12 +84,12 @@ extension TimetableViewController: TimetableViewProtocol {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(recognizer:)))
         panGesture.maximumNumberOfTouches = 1
         panGesture.delegate = self
-        view.addGestureRecognizer(panGesture)
+        dayTableView.addGestureRecognizer(panGesture)
     }
     
     @objc func handlePanGesture(recognizer: UIPanGestureRecognizer) {
         let state = recognizer.state
-        let translation = recognizer.translation(in: self.view)
+        let translation = recognizer.translation(in: self.dayTableView)
         
         switch state {
         case .began:
@@ -116,7 +116,7 @@ extension TimetableViewController: TimetableViewProtocol {
     
     func onTablePanXChange(recognizer: UIPanGestureRecognizer) {
         
-        let translation = recognizer.translation(in: self.view)
+        let translation = recognizer.translation(in: self.dayTableView)
         
         dayTableView.alpha = 0
         
