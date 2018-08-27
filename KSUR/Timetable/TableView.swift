@@ -63,3 +63,11 @@ extension TimetableViewController: UITableViewDataSource {
     }
     
 }
+
+extension TimetableViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.onDayScroll()
+    }
+    
+}

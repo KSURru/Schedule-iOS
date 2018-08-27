@@ -96,6 +96,8 @@ protocol LessonsDayProtocol: class {
     var title: String { get }
     var sections: [LessonsSectionProtocol?] { get }
     var frame: UIImage? { get set }
+    var scrollOffset: CGFloat { get set }
+    var scrolledFrame: UIImage? { get set }
 }
 
 class LessonsDay: LessonsDayProtocol {
@@ -103,10 +105,49 @@ class LessonsDay: LessonsDayProtocol {
     let title: String
     let sections: [LessonsSectionProtocol?]
     var frame: UIImage?
+    var scrollOffset: CGFloat
+    var scrolledFrame: UIImage?
     
     init(id: Int, title: String, sections: [LessonsSectionProtocol?]) {
         self.id = id
         self.title = title
         self.sections = sections
+        self.scrollOffset = 0
+    }
+}
+
+protocol LessonsWeekProtocol: class {
+    var id: Int { get }
+    var even: Bool { get }
+    var days: [LessonsDayProtocol?] { get }
+}
+
+class LessonsWeek: LessonsWeekProtocol {
+    let id: Int
+    let even: Bool
+    let days: [LessonsDayProtocol?]
+    
+    init(id: Int, even: Bool, days: [LessonsDayProtocol?]) {
+        self.id = id
+        self.even = even
+        self.days = days
+    }
+}
+
+protocol LessonsGroupProtocol: class {
+    var id: Int { get }
+    var title: String { get }
+    var weeks: [LessonsWeekProtocol?] { get }
+}
+
+class LessonsGroup: LessonsGroupProtocol {
+    let id: Int
+    let title: String
+    let weeks: [LessonsWeekProtocol?]
+    
+    init(id: Int, title: String, weeks: [LessonsWeekProtocol?]) {
+        self.id = id
+        self.title = title
+        self.weeks = weeks
     }
 }

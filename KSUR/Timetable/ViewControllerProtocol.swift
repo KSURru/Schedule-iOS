@@ -56,12 +56,15 @@ extension TimetableViewController: TimetableViewProtocol {
         
         self.view.isUserInteractionEnabled = false
         
+        presenter.dayFrame(atIndex: fromIndex, setScrollOffset: 0, setScrolledFrame: nil)
+        
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
             
             self.renderedPrevImageView.transform = CGAffineTransform(translationX: tableWidthTranslation, y: 0)
             self.renderedNextImageView.transform = CGAffineTransform(translationX: 0, y: 0)
             
         }) { (_) in
+            
             self.renderedPrevImageView.alpha = 0
             self.renderedPrevImageView.transform = CGAffineTransform(translationX: 0, y: 0)
             self.renderedNextImageView.alpha = 0
@@ -93,7 +96,7 @@ extension TimetableViewController: TimetableViewProtocol {
         
         switch state {
         case .began:
-            _ = fabs(translation.x) > fabs(translation.y) ? onTablePanXBegin(recognizer: recognizer) : nil
+            _ = abs(translation.x) > abs(translation.y) ? onTablePanXBegin(recognizer: recognizer) : nil
             break
         case .changed:
             _ = isPanX ? onTablePanXChange(recognizer: recognizer) : nil
@@ -169,8 +172,8 @@ extension TimetableViewController: TimetableViewProtocol {
         
         isPanX = false
         
-        if fabs(self.renderedPrevImageView.transform.tx) > (UIScreen.main.bounds.size.width / 5) {
-            if direction == 1 { leftSwipe(fabs(self.renderedPrevImageView.transform.tx)) } else { rightSwipe(fabs(self.renderedPrevImageView.transform.tx)) }
+        if abs(self.renderedPrevImageView.transform.tx) > (UIScreen.main.bounds.size.width / 5) {
+            if direction == 1 { leftSwipe(abs(self.renderedPrevImageView.transform.tx)) } else { rightSwipe(abs(self.renderedPrevImageView.transform.tx)) }
         } else {
             
             UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
@@ -187,6 +190,19 @@ extension TimetableViewController: TimetableViewProtocol {
                 self.dayTableView.alpha = 1
                 self.view.isUserInteractionEnabled = true
             }
+            
+        }
+        
+    }
+    
+    func onDayScroll() {
+        
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
+            
+            let scrollOffset = self.dayTableView.contentOffset.y
+            guard let renderedTableViewImage = self.dayTableView.renderedImage else { return }
+            
+            self.presenter.dayFrame(atIndex: self.selectedDay, setScrollOffset: scrollOffset, setScrolledFrame: renderedTableViewImage)
             
         }
         

@@ -31,6 +31,11 @@ protocol TimetablePresenterProtocol: class {
     
     func dayFrame(atIndex: Int) -> UIImage?
     func dayFrame(atIndex: Int, setFrame: UIImage?)
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?)
+    
+    func dayScrollOffset(atIndex: Int) -> CGFloat?
+    
+    func setEven(_ to: Bool)
 }
 
 class TimetablePresenter: TimetablePresenterProtocol {
@@ -107,6 +112,18 @@ class TimetablePresenter: TimetablePresenterProtocol {
     
     func dayFrame(atIndex: Int, setFrame: UIImage?) {
         interactor.dayFrame(atIndex: atIndex, setFrame: setFrame)
+    }
+    
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?) {
+        interactor.dayFrame(atIndex: atIndex, setScrollOffset: setScrollOffset, setScrolledFrame: setScrolledFrame)
+    }
+    
+    func dayScrollOffset(atIndex: Int) -> CGFloat? {
+        return interactor.dayScrollOffset(atIndex: atIndex)
+    }
+    
+    func setEven(_ to: Bool) {
+        interactor.setEven(to)
     }
     
     required init(view: TimetableViewProtocol) {

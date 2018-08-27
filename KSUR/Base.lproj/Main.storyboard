@@ -54,16 +54,53 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="647"/>
                                         <color key="backgroundColor" red="0.0" green="0.86899999999999999" blue="0.71720274669999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnV-rw-mRM">
+                                        <rect key="frame" x="0.0" y="584" width="414" height="63"/>
+                                        <subviews>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OO8-Yu-Xka">
+                                                <rect key="frame" x="16" y="16" width="51" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="49" id="gxi-vw-IoY"/>
+                                                    <constraint firstAttribute="height" constant="31" id="t7Z-1y-fep"/>
+                                                </constraints>
+                                                <color key="onTintColor" red="0.0" green="0.87058823529999996" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <connections>
+                                                    <action selector="evenSwitchValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="VKX-ws-EEp"/>
+                                                </connections>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нечетная" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjs-sx-KvC">
+                                                <rect key="frame" x="77" y="21" width="75.666666666666686" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="75.670000000000002" id="CbQ-2T-yzw"/>
+                                                    <constraint firstAttribute="height" constant="21" id="dse-0X-Za8"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.050000000000000003" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="OO8-Yu-Xka" firstAttribute="centerY" secondItem="dnV-rw-mRM" secondAttribute="centerY" id="Kve-Ek-TBx"/>
+                                            <constraint firstItem="OO8-Yu-Xka" firstAttribute="leading" secondItem="dnV-rw-mRM" secondAttribute="leading" constant="16" id="R2R-aO-QQw"/>
+                                            <constraint firstItem="Cjs-sx-KvC" firstAttribute="leading" secondItem="OO8-Yu-Xka" secondAttribute="trailing" constant="12" id="diT-hb-qAE"/>
+                                            <constraint firstItem="Cjs-sx-KvC" firstAttribute="centerY" secondItem="dnV-rw-mRM" secondAttribute="centerY" id="iIb-gY-rlW"/>
+                                            <constraint firstAttribute="height" constant="63" id="lIQ-Eg-gez"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dnV-rw-mRM" secondAttribute="trailing" id="03z-rj-FUg"/>
+                                    <constraint firstAttribute="bottom" secondItem="dnV-rw-mRM" secondAttribute="bottom" id="KL1-1p-B3o"/>
                                     <constraint firstAttribute="bottom" secondItem="uA2-a9-Wgi" secondAttribute="bottom" id="Mz6-Oe-U0M"/>
                                     <constraint firstItem="uA2-a9-Wgi" firstAttribute="top" secondItem="GwP-me-ndW" secondAttribute="top" id="Txb-JM-Qzs"/>
                                     <constraint firstAttribute="trailing" secondItem="uA2-a9-Wgi" secondAttribute="trailing" id="kxj-B9-kwa"/>
+                                    <constraint firstItem="dnV-rw-mRM" firstAttribute="leading" secondItem="GwP-me-ndW" secondAttribute="leading" id="p9N-YU-wSU"/>
                                     <constraint firstItem="uA2-a9-Wgi" firstAttribute="leading" secondItem="GwP-me-ndW" secondAttribute="leading" id="zTw-a7-txx"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="C2l-GH-XHq">
-                                <rect key="frame" x="0.0" y="89" width="414" height="647"/>
+                                <rect key="frame" x="0.0" y="89" width="414" height="584"/>
                                 <color key="backgroundColor" red="0.052999999999999999" green="0.053385417908430099" blue="0.053385417908430099" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="edX-WF-v6h">
@@ -73,7 +110,7 @@
                         <color key="backgroundColor" red="0.052999999999999999" green="0.053385417908430099" blue="0.053385417908430099" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="C2l-GH-XHq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6qI-p4-V7m"/>
-                            <constraint firstItem="C2l-GH-XHq" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="D8a-Ys-tv2"/>
+                            <constraint firstItem="C2l-GH-XHq" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-63" id="D8a-Ys-tv2"/>
                             <constraint firstItem="0d8-aG-6Pz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Dca-Gv-Ecc"/>
                             <constraint firstItem="0d8-aG-6Pz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KRT-W8-F2p"/>
                             <constraint firstItem="GwP-me-ndW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="L8m-4M-WKE"/>
@@ -96,6 +133,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="dayTableView" destination="C2l-GH-XHq" id="bF0-2g-m9h"/>
+                        <outlet property="evenLabel" destination="Cjs-sx-KvC" id="xbk-EH-qV6"/>
+                        <outlet property="evenSwitch" destination="OO8-Yu-Xka" id="70U-D0-ujO"/>
                         <outlet property="loaderView" destination="edX-WF-v6h" id="e1W-23-kZu"/>
                         <outlet property="nextView" destination="GwP-me-ndW" id="6Fh-lB-hRY"/>
                         <outlet property="prevView" destination="0d8-aG-6Pz" id="dsh-mv-lpY"/>

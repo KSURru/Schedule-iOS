@@ -23,6 +23,11 @@ protocol TimetableInteractorProtocol: class {
     
     func dayFrame(atIndex: Int) -> UIImage?
     func dayFrame(atIndex: Int, setFrame: UIImage?)
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?)
+    
+    func dayScrollOffset(atIndex: Int) -> CGFloat?
+    
+    func setEven(_ to: Bool)
 }
 
 class TimetableInteractor: TimetableInteractorProtocol {
@@ -80,6 +85,18 @@ class TimetableInteractor: TimetableInteractorProtocol {
     
     func dayFrame(atIndex: Int, setFrame: UIImage?) {
         dayConstructorService.dayFrame(atIndex: atIndex, setFrame: setFrame)
+    }
+    
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?) {
+        dayConstructorService.dayFrame(atIndex: atIndex, setScrollOffset: setScrollOffset, setScrolledFrame: setScrolledFrame)
+    }
+    
+    func dayScrollOffset(atIndex: Int) -> CGFloat? {
+        return dayConstructorService.dayScrollOffset(atIndex: atIndex)
+    }
+    
+    func setEven(_ to: Bool) {
+        dayConstructorService.setEven(to)
     }
     
 }

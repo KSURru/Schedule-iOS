@@ -10,6 +10,7 @@
 		C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93F921068BAD0016114F /* StringSizeExtension.swift */; };
 		C32D93FD210690CC0016114F /* TimetableLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */; };
 		C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FE210693680016114F /* WeekConstructorService.swift */; };
+		C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DD5F521331A0500117FD6 /* main.pb.swift */; };
 		C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25322103F95F00FBEF53 /* AppDelegate.swift */; };
 		C35B25382103F95F00FBEF53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B25362103F95F00FBEF53 /* Main.storyboard */; };
 		C35B253D2103F96000FBEF53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35B253C2103F96000FBEF53 /* Assets.xcassets */; };
@@ -28,7 +29,6 @@
 		C3A15EF62113AAAD0056C8BB /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */; };
 		C3CEE448211911CA00CF6846 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */; };
 		C3CEE44B211912F900CF6846 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44A211912F900CF6846 /* APIService.swift */; };
-		C3CEE44D2119171100CF6846 /* week.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44C2119171100CF6846 /* week.pb.swift */; };
 		C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44E21191DC000CF6846 /* DeserializerService.swift */; };
 		C3CFC3C82104015300A999A4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C72104015300A999A4 /* Router.swift */; };
 		C3CFC3CA2104021100A999A4 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C92104021100A999A4 /* Interactor.swift */; };
@@ -56,6 +56,7 @@
 		C32D93F921068BAD0016114F /* StringSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSizeExtension.swift; sourceTree = "<group>"; };
 		C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonTableViewCell.swift; sourceTree = "<group>"; };
 		C32D93FE210693680016114F /* WeekConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekConstructorService.swift; sourceTree = "<group>"; };
+		C33DD5F521331A0500117FD6 /* main.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.pb.swift; path = Proto/main.pb.swift; sourceTree = SOURCE_ROOT; };
 		C35B252F2103F95F00FBEF53 /* KSUR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSUR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B25322103F95F00FBEF53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C35B25372103F95F00FBEF53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
 		C3CEE44A211912F900CF6846 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		C3CEE44C2119171100CF6846 /* week.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = week.pb.swift; path = Proto/week.pb.swift; sourceTree = SOURCE_ROOT; };
 		C3CEE44E21191DC000CF6846 /* DeserializerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializerService.swift; sourceTree = "<group>"; };
 		C3CFC3C72104015300A999A4 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C3CFC3C92104021100A999A4 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		C35B25312103F95F00FBEF53 /* KSUR */ = {
 			isa = PBXGroup;
 			children = (
-				C3CEE44C2119171100CF6846 /* week.pb.swift */,
+				C33DD5F521331A0500117FD6 /* main.pb.swift */,
 				C35B25322103F95F00FBEF53 /* AppDelegate.swift */,
 				C35B25362103F95F00FBEF53 /* Main.storyboard */,
 				C35B253C2103F96000FBEF53 /* Assets.xcassets */,
@@ -292,13 +292,16 @@
 				TargetAttributes = {
 					C35B252E2103F95F00FBEF53 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					C35B25452103F96000FBEF53 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = C35B252E2103F95F00FBEF53;
 					};
 					C35B25502103F96000FBEF53 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = C35B252E2103F95F00FBEF53;
 					};
 				};
@@ -381,7 +384,6 @@
 				C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */,
 				C3CFC3C82104015300A999A4 /* Router.swift in Sources */,
 				C38765BE210F44BE00987C25 /* CollectionView.swift in Sources */,
-				C3CEE44D2119171100CF6846 /* week.pb.swift in Sources */,
 				C35B25662103FE0300FBEF53 /* Configurator.swift in Sources */,
 				C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */,
 				C3A15EF62113AAAD0056C8BB /* ViewControllerProtocol.swift in Sources */,
@@ -391,6 +393,7 @@
 				C35B25692103FF1300FBEF53 /* Presenter.swift in Sources */,
 				C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */,
 				C35B25642103FDAE00FBEF53 /* ViewController.swift in Sources */,
+				C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */,
 				C39B331321073AB30008370E /* TimetableDayCollectionViewCell.swift in Sources */,
 				C39B331121073A290008370E /* Lesson.swift in Sources */,
 				C39B330D2107360F0008370E /* Day.swift in Sources */,
@@ -584,14 +587,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"OTHER_LDFLAGS[arch=*]" = (
-					"-ObjC",
-					"-weak_framework",
-					RevealServer,
-				);
+				"OTHER_LDFLAGS[arch=*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.ksur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -613,7 +612,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.ksur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -633,7 +632,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.KSURTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KSUR.app/KSUR";
 			};
@@ -654,7 +653,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.KSURTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KSUR.app/KSUR";
 			};
@@ -674,7 +673,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.KSURUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = KSUR;
 			};
@@ -694,7 +693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickaroot.KSURUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = KSUR;
 			};

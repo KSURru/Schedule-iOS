@@ -17,7 +17,8 @@ protocol APIServiceProtocol: class {
     var port: Int { get }
     var version: Int { get }
     
-    func getWeek(group: Int, even: Bool) -> [LessonsDayProtocol?]?
+    func getGroup(atIndex: Int) -> LessonsGroupProtocol?
+    func getWeek(group: Int, even: Bool) -> LessonsWeekProtocol?
     
 }
 
@@ -39,7 +40,28 @@ class APIService: APIServiceProtocol {
         
     }
     
-    func getWeek(group: Int, even: Bool) -> [LessonsDayProtocol?]? {
+    func getGroup(atIndex: Int) -> LessonsGroupProtocol? {
+        
+        let urlString = "http://\(host):\(port)/v\(version)/groups/\(atIndex)"
+        guard let url = URL(string: urlString) else { return nil }
+        
+        do {
+            
+            let data = try Data(contentsOf: url)
+            let group = try! ProtoGroup(serializedData: data)
+            
+            return deserializer.deserializeGroup(group)
+            
+        } catch {
+            
+            print("\(error)")
+            return nil
+            
+        }
+        
+    }
+    
+    func getWeek(group: Int, even: Bool) -> LessonsWeekProtocol? {
         
         let urlString = "http://\(host):\(port)/v\(version)/groups/\(group)/weeks/\(even)"
         guard let url = URL(string: urlString) else { return nil }
@@ -47,7 +69,7 @@ class APIService: APIServiceProtocol {
         do {
             
             let data = try Data(contentsOf: url)
-            let week = try! Week(serializedData: data)
+            let week = try! ProtoWeek(serializedData: data)
             
             return deserializer.deserializeWeek(week)
             

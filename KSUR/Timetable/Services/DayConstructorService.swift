@@ -12,7 +12,9 @@ protocol DayConstructorServiceProtocol {
     
     var apiService: APIServiceProtocol { get }
     
-    var days: [LessonsDayProtocol?] { get set }
+//    var days: [LessonsDayProtocol?] { get set }
+    var group: LessonsGroupProtocol? { get set }
+    var even: Bool { get set }
     
     func day(atIndex: Int) -> LessonsDayProtocol?
     func section(atIndex: Int, atDay: Int) -> LessonsSectionProtocol?
@@ -29,8 +31,13 @@ protocol DayConstructorServiceProtocol {
     
     func dayFrame(atIndex: Int) -> UIImage?
     func dayFrame(atIndex: Int, setFrame: UIImage?)
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?)
+    
+    func dayScrollOffset(atIndex: Int) -> CGFloat?
     
     func constructCells()
+    
+    func setEven(_ to: Bool)
     
 }
 
@@ -38,17 +45,21 @@ class DayConstructorService: DayConstructorServiceProtocol {
     
     let apiService: APIServiceProtocol
     
-    var days = [LessonsDayProtocol?]()
+//    var days = [LessonsDayProtocol?]()
+    var group: LessonsGroupProtocol?
+    var even = false
     
     func day(atIndex: Int) -> LessonsDayProtocol? {
-        guard let day = ( days.filter { $0?.id == atIndex } ).first else { return nil }
+        
+        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return nil }
+        guard let day = days.filter( { $0?.id == atIndex } ).first else { return nil }
         
         return day
     }
     
     func section(atIndex: Int, atDay: Int) -> LessonsSectionProtocol? {
         guard let day = day(atIndex: atDay) else { return nil }
-        guard let section = (day.sections.filter { $0?.id == atIndex }).first else { return nil }
+        guard let section = day.sections.filter( { $0?.id == atIndex } ).first else { return nil }
         
         return section
     }
@@ -195,17 +206,44 @@ class DayConstructorService: DayConstructorServiceProtocol {
     func dayFrame(atIndex: Int) -> UIImage? {
         guard let day = day(atIndex: atIndex) else { return nil }
         
-        return day.frame
+        return day.scrollOffset < 10 ? day.frame : day.scrolledFrame
     }
     
     func dayFrame(atIndex: Int, setFrame: UIImage?) {
         
+        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return }
+        
         if atIndex < days.count {
             days[atIndex]!.frame = setFrame
         }
+        
+    }
+    
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?) {
+        
+        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return }
+        
+        if atIndex < days.count {
+            
+            days[atIndex]!.scrollOffset = setScrollOffset
+            
+            days[atIndex]!.scrolledFrame = setScrolledFrame
+        
+        }
+        
+    }
+    
+    func dayScrollOffset(atIndex: Int) -> CGFloat? {
+        
+        guard let day = day(atIndex: atIndex) else { return nil }
+        
+        return day.scrollOffset
+        
     }
     
     func constructCells() {
+        
+        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return }
         
         for day in days {
             
@@ -233,13 +271,17 @@ class DayConstructorService: DayConstructorServiceProtocol {
         
     }
     
+    func setEven(_ to: Bool) {
+        even = to
+    }
+    
     init(api: APIServiceProtocol) {
         
         self.apiService = api
         
-        guard let week = apiService.getWeek(group: 0, even: false) else { return }
+        guard let group = apiService.getGroup(atIndex: 0) else { return }
         
-        days = week
+        self.group = group
         
         self.constructCells()
     }

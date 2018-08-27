@@ -28,6 +28,8 @@ class TimetableViewController: UIViewController {
     @IBOutlet weak var prevView: UIView!
     @IBOutlet weak var nextView: UIView!
     @IBOutlet weak var loaderView: UIActivityIndicatorView!
+    @IBOutlet weak var evenSwitch: UISwitch!
+    @IBOutlet weak var evenLabel: UILabel!
     
     var presenter: TimetablePresenterProtocol!
     let configurator: TimetableConfiguratorProtocol = TimetableConfigurator()
@@ -67,7 +69,56 @@ class TimetableViewController: UIViewController {
             return .lightContent
         }
     }
-
+    
+    
+    @IBAction func evenSwitchValueChanged(_ sender: Any) {
+        
+        presenter.setEven(evenSwitch.isOn)
+        
+        if evenSwitch.isOn {
+            
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
+                
+                self.evenLabel.alpha = 0
+                
+            }) { (_) in
+                
+                self.evenLabel.textColor = UIColor(red: 0, green: 222, blue: 183, alpha: 1)
+                self.evenLabel.text = "Четная"
+                
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+                    
+                    self.evenLabel.alpha = 1
+                    
+                })
+                
+            }
+            
+        } else {
+            
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
+                
+                self.evenLabel.alpha = 0
+                
+            }) { (_) in
+                
+                self.evenLabel.textColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+                self.evenLabel.text = "Нечетная"
+                
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+                    
+                    self.evenLabel.alpha = 1
+                    
+                })
+                
+            }
+            
+        }
+        
+        reloadDayTableData()
+        
+    }
+    
 }
 
 extension TimetableViewController: UIGestureRecognizerDelegate {
