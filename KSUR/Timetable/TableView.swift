@@ -8,9 +8,7 @@
 
 import UIKit
 
-extension TimetableViewController: UITableViewDelegate { }
-
-extension TimetableViewController: UITableViewDataSource {
+extension TimetableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.daySectionsCount(atDay: selectedDay)
@@ -42,16 +40,14 @@ extension TimetableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = dayTableView.dequeueReusableCell(withIdentifier: "dayCell", for: indexPath)
+//        let cell = dayTableView.dequeueReusableCell(withIdentifier: "dayCell", for: indexPath) as! TimetableLessonTableViewCell
         
-        guard let lessonFrame = presenter.lessonFrame(atIndex: indexPath, atDay: selectedDay) else { return UITableViewCell() }
-        lessonFrame.isUserInteractionEnabled = false
+//        guard let lessonFrame = presenter.lessonFrame(atIndex: indexPath, atDay: selectedDay) else { return UITableViewCell() }
         
-        cell.frame.size = lessonFrame.frame.size
-        cell.layer.sublayers = [cell.layer.sublayers![0], lessonFrame.layer]
+        guard let lessonCell = presenter.lessonCell(atIndex: indexPath, atDay: selectedDay) else { return UITableViewCell() }
+        lessonCell.isUserInteractionEnabled = false
         
-        
-        return cell
+        return lessonCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

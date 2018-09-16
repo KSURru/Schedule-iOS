@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93F921068BAD0016114F /* StringSizeExtension.swift */; };
-		C32D93FD210690CC0016114F /* TimetableLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */; };
+		C32D93FD210690CC0016114F /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* LessonTableViewCell.swift */; };
 		C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FE210693680016114F /* WeekConstructorService.swift */; };
 		C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DD5F521331A0500117FD6 /* main.pb.swift */; };
 		C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25322103F95F00FBEF53 /* AppDelegate.swift */; };
@@ -25,7 +25,7 @@
 		C39B330D2107360F0008370E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330C2107360F0008370E /* Day.swift */; };
 		C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330E2107399C0008370E /* DayConstructorService.swift */; };
 		C39B331121073A290008370E /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331021073A290008370E /* Lesson.swift */; };
-		C39B331321073AB30008370E /* TimetableDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331221073AB30008370E /* TimetableDayCollectionViewCell.swift */; };
+		C39B331321073AB30008370E /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331221073AB30008370E /* DayCollectionViewCell.swift */; };
 		C3A15EF62113AAAD0056C8BB /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */; };
 		C3CEE448211911CA00CF6846 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */; };
 		C3CEE44B211912F900CF6846 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44A211912F900CF6846 /* APIService.swift */; };
@@ -54,7 +54,7 @@
 
 /* Begin PBXFileReference section */
 		C32D93F921068BAD0016114F /* StringSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSizeExtension.swift; sourceTree = "<group>"; };
-		C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonTableViewCell.swift; sourceTree = "<group>"; };
+		C32D93FC210690CC0016114F /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		C32D93FE210693680016114F /* WeekConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekConstructorService.swift; sourceTree = "<group>"; };
 		C33DD5F521331A0500117FD6 /* main.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.pb.swift; path = Proto/main.pb.swift; sourceTree = SOURCE_ROOT; };
 		C35B252F2103F95F00FBEF53 /* KSUR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSUR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +77,7 @@
 		C39B330C2107360F0008370E /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		C39B330E2107399C0008370E /* DayConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayConstructorService.swift; sourceTree = "<group>"; };
 		C39B331021073A290008370E /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
-		C39B331221073AB30008370E /* TimetableDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		C39B331221073AB30008370E /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3A15EF52113AAAD0056C8BB /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
 		C3CEE44A211912F900CF6846 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		C36AC8A82107EF70007991A5 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C32D93FC210690CC0016114F /* TimetableLessonTableViewCell.swift */,
-				C39B331221073AB30008370E /* TimetableDayCollectionViewCell.swift */,
+				C32D93FC210690CC0016114F /* LessonTableViewCell.swift */,
+				C39B331221073AB30008370E /* DayCollectionViewCell.swift */,
 				C39B331021073A290008370E /* Lesson.swift */,
 				C39B330C2107360F0008370E /* Day.swift */,
 			);
@@ -394,10 +394,10 @@
 				C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */,
 				C35B25642103FDAE00FBEF53 /* ViewController.swift in Sources */,
 				C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */,
-				C39B331321073AB30008370E /* TimetableDayCollectionViewCell.swift in Sources */,
+				C39B331321073AB30008370E /* DayCollectionViewCell.swift in Sources */,
 				C39B331121073A290008370E /* Lesson.swift in Sources */,
 				C39B330D2107360F0008370E /* Day.swift in Sources */,
-				C32D93FD210690CC0016114F /* TimetableLessonTableViewCell.swift in Sources */,
+				C32D93FD210690CC0016114F /* LessonTableViewCell.swift in Sources */,
 				C3CEE44B211912F900CF6846 /* APIService.swift in Sources */,
 				C38765BC210F447300987C25 /* TableView.swift in Sources */,
 			);

@@ -36,34 +36,10 @@ extension TimetableViewController: UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        
-        guard let dayCell = presenter.dayCell(atIndex: indexPath) else { return }
-        
-        UIView.animate(withDuration: 1.0) {
-            
-            dayCell.titleLabel.textColor = .init(white: 1.0, alpha: 0.5)
-            dayCell.dateLabel.textColor = .init(white: 1.0, alpha: 0.5)
-            
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        
-        guard let dayCell = presenter.dayCell(atIndex: indexPath) else { return }
-        
-        UIView.animate(withDuration: 1.0) {
-            
-            dayCell.titleLabel.textColor = .init(white: 1.0, alpha: 1.0)
-            dayCell.dateLabel.textColor = .init(white: 1.0, alpha: 1.0)
-            
-        }
-        
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         changeDay(toIndex: indexPath.item, translation: 0)
+        
     }
 }
 

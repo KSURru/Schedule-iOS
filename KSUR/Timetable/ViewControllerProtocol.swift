@@ -14,8 +14,32 @@ extension TimetableViewController: TimetableViewProtocol {
         weekCollectionView.reloadData()
     }
     
-    func reloadDayTableData() {
-        dayTableView.reloadData()
+    func reloadDayTableData(animated: Bool) {
+        
+        if animated {
+            
+            UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
+                
+                self.dayTableView.alpha = 0
+                
+            }) { (_) in
+                
+                self.dayTableView.reloadData()
+                
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
+                    
+                    self.dayTableView.alpha = 1
+                    
+                })
+                
+            }
+            
+        } else {
+            
+            dayTableView.reloadData()
+            
+        }
+        
     }
     
     func addBorderToWeekCollectionView() {
@@ -33,15 +57,18 @@ extension TimetableViewController: TimetableViewProtocol {
         
         let fromIndex = selectedDay
         
-        presenter.updateActiveDayCell(toIndex: toIndex)
-        reloadWeekCollectionData()
+        let activeCell = weekCollectionView.cellForItem(at: IndexPath(item: self.selectedDay, section: 0)) as! TimetableDayCollectionViewCell
+        let selectedCell = weekCollectionView.cellForItem(at: IndexPath(item: toIndex, section: 0)) as! TimetableDayCollectionViewCell
+        
+        activeCell.isActive = false
+        selectedCell.isActive = true
         
         var tableWidthTranslation = selectedDay < toIndex ? -(self.dayTableView.frame.size.width) : (self.dayTableView.frame.size.width)
         tableWidthTranslation = selectedDay == toIndex ? 0 : tableWidthTranslation
         
         selectedDay = toIndex
         dayTableView.alpha = 0
-        reloadDayTableData()
+        reloadDayTableData(animated: false)
         
         renderedPrevImageView.transform = CGAffineTransform(translationX: translation, y: 0)
         renderedNextImageView.transform = CGAffineTransform(translationX: -tableWidthTranslation + translation, y: 0)
@@ -198,53 +225,72 @@ extension TimetableViewController: TimetableViewProtocol {
     func onDayScroll() {
         
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
-            
+        
             let scrollOffset = self.dayTableView.contentOffset.y
             guard let renderedTableViewImage = self.dayTableView.renderedImage else { return }
             
             self.presenter.dayFrame(atIndex: self.selectedDay, setScrollOffset: scrollOffset, setScrolledFrame: renderedTableViewImage)
             
         }
-        
+    
     }
     
-    func renderTableViewImages() {
+    func renderWeekImages(even: Bool, completion: @escaping (() -> Void)) {
         
         dayTableView.transform = CGAffineTransform(translationX: dayTableView.frame.size.width, y: 0)
         self.view.isUserInteractionEnabled = false
         
-        var d = 0
+        presenter.setEven(even)
         
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { (t) in
+        var dayId = presenter.weekCount
             
-            let i = (self.presenter.weekCount - 1) - d
+        Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { (t) in
             
-            self.selectedDay = i
-            self.reloadDayTableData()
+            dayId -= 1
+            
+            self.selectedDay = dayId
+            self.reloadDayTableData(animated: false)
             
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
                 
                 guard let renderedTableViewImage = self.dayTableView.renderedImage else { return }
-                self.presenter.dayFrame(atIndex: i, setFrame: renderedTableViewImage)
+                self.presenter.dayFrame(atIndex: dayId, setFrame: renderedTableViewImage)
                 
             })
             
-            d += 1
-            
-            if i == 0 {
+            if dayId == 0 {
                 
                 t.invalidate()
-                self.dayTableView.alpha = 0
-                self.dayTableView.transform = CGAffineTransform(translationX: 0, y: 0)
+                completion()
                 
-                UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
-                    self.dayTableView.alpha = 1
-                    self.loaderView.alpha = 0
-                }, completion: { (_) in
-                    self.loaderView.stopAnimating()
-                    self.view.isUserInteractionEnabled = true
-                })
             }
+            
+        }
+            
+    }
+    
+    func renderTableViewImages() {
+        
+        renderWeekImages(even: true) {
+
+            Timer.scheduledTimer(withTimeInterval: 0.15, repeats: false, block: { (_) in
+                
+                self.renderWeekImages(even: false, completion: {
+                
+                    self.dayTableView.alpha = 0
+                    self.dayTableView.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                    UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+                        self.dayTableView.alpha = 1
+                        self.loaderView.alpha = 0
+                    }, completion: { (_) in
+                        self.loaderView.stopAnimating()
+                        self.view.isUserInteractionEnabled = true
+                    })
+                    
+                })
+                
+            })
             
         }
         

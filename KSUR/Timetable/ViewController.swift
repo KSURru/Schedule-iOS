@@ -10,12 +10,13 @@ import UIKit
 
 protocol TimetableViewProtocol: class {
     func reloadWeekCollectionData()
-    func reloadDayTableData()
+    func reloadDayTableData(animated: Bool)
     func addBorderToWeekCollectionView()
     func changeDay(toIndex: Int, translation: CGFloat)
     func leftSwipe(_ translation: CGFloat)
     func rightSwipe(_ translation: CGFloat)
     func createPanGestureRecognizer()
+    func renderWeekImages(even: Bool, completion: @escaping (() -> Void))
     func renderTableViewImages()
 }
 
@@ -28,8 +29,7 @@ class TimetableViewController: UIViewController {
     @IBOutlet weak var prevView: UIView!
     @IBOutlet weak var nextView: UIView!
     @IBOutlet weak var loaderView: UIActivityIndicatorView!
-    @IBOutlet weak var evenSwitch: UISwitch!
-    @IBOutlet weak var evenLabel: UILabel!
+    @IBOutlet weak var evenSegmented: UISegmentedControl!
     
     var presenter: TimetablePresenterProtocol!
     let configurator: TimetableConfiguratorProtocol = TimetableConfigurator()
@@ -57,7 +57,7 @@ class TimetableViewController: UIViewController {
         
         dayTableView.delegate = self
         dayTableView.dataSource = self
-        dayTableView.register(TimetableLessonTableViewCell.self, forCellReuseIdentifier: "dayCell")
+//        dayTableView.register(TimetableLessonTableViewCell.self, forCellReuseIdentifier: "dayCell")
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         dayTableView.tableHeaderView = UIView(frame: frame)
@@ -71,51 +71,23 @@ class TimetableViewController: UIViewController {
     }
     
     
-    @IBAction func evenSwitchValueChanged(_ sender: Any) {
+    @IBAction func evenSegmentedValueChanged(_ sender: Any) {
         
-        presenter.setEven(evenSwitch.isOn)
+        let isEven = evenSegmented.selectedSegmentIndex == 1
         
-        if evenSwitch.isOn {
-            
-            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
-                
-                self.evenLabel.alpha = 0
-                
-            }) { (_) in
-                
-                self.evenLabel.textColor = UIColor(red: 0, green: 222, blue: 183, alpha: 1)
-                self.evenLabel.text = "Четная"
-                
-                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
-                    
-                    self.evenLabel.alpha = 1
-                    
-                })
-                
-            }
-            
-        } else {
-            
-            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
-                
-                self.evenLabel.alpha = 0
-                
-            }) { (_) in
-                
-                self.evenLabel.textColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
-                self.evenLabel.text = "Нечетная"
-                
-                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
-                    
-                    self.evenLabel.alpha = 1
-                    
-                })
-                
-            }
-            
-        }
+        presenter.setEven(isEven)
         
-        reloadDayTableData()
+        UIView.animate(
+            withDuration: 0.45,
+            delay: 0,
+            usingSpringWithDamping: 0.45,
+            initialSpringVelocity: 0.45,
+            options: [.allowUserInteraction, .beginFromCurrentState],
+            animations: { self.evenSegmented.tintColor = isEven ? UIColor(red: 0, green: 0.869, blue: 0.717, alpha: 1) : UIColor(white: 1, alpha: 1) },
+            completion: nil
+        )
+        
+        reloadDayTableData(animated: true)
         
     }
     

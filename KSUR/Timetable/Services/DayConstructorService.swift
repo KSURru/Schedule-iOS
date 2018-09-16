@@ -12,7 +12,7 @@ protocol DayConstructorServiceProtocol {
     
     var apiService: APIServiceProtocol { get }
     
-//    var days: [LessonsDayProtocol?] { get set }
+    var days: [Bool : [LessonsDayProtocol?]] { get set }
     var group: LessonsGroupProtocol? { get set }
     var even: Bool { get set }
     
@@ -45,13 +45,13 @@ class DayConstructorService: DayConstructorServiceProtocol {
     
     let apiService: APIServiceProtocol
     
-//    var days = [LessonsDayProtocol?]()
+    var days = [Bool : [LessonsDayProtocol?]]()
     var group: LessonsGroupProtocol?
     var even = false
     
     func day(atIndex: Int) -> LessonsDayProtocol? {
         
-        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return nil }
+        guard let days = self.days[self.even] else { return nil }
         guard let day = days.filter( { $0?.id == atIndex } ).first else { return nil }
         
         return day
@@ -209,19 +209,19 @@ class DayConstructorService: DayConstructorServiceProtocol {
         return day.scrollOffset < 10 ? day.frame : day.scrolledFrame
     }
     
-    func dayFrame(atIndex: Int, setFrame: UIImage?) {
+    func dayFrame(atIndex: Int, setFrame frame: UIImage?) {
         
-        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return }
+        guard let days = self.days[self.even] else { return }
         
         if atIndex < days.count {
-            days[atIndex]!.frame = setFrame
+            days[atIndex]!.frame = frame
         }
         
     }
     
     func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?) {
         
-        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return }
+        guard let days = self.days[self.even] else { return }
         
         if atIndex < days.count {
             
@@ -243,7 +243,7 @@ class DayConstructorService: DayConstructorServiceProtocol {
     
     func constructCells() {
         
-        guard let days = group?.weeks.filter( { $0!.even == self.even } ).first!?.days else { return }
+        guard let days = self.days[self.even] else { return }
         
         for day in days {
             
@@ -281,7 +281,13 @@ class DayConstructorService: DayConstructorServiceProtocol {
         
         guard let group = apiService.getGroup(atIndex: 0) else { return }
         
+        guard let evenDays = group.weeks.filter( { $0!.even == true } ).first!?.days else { return }
+        guard let oddDays = group.weeks.filter( { $0!.even == false } ).first!?.days else { return }
+        
         self.group = group
+        
+        self.days[true] = evenDays
+        self.days[false] = oddDays
         
         self.constructCells()
     }
