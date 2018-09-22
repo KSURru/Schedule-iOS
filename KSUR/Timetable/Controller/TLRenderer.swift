@@ -27,7 +27,7 @@ extension TimetableViewController: TimetableRendererProtocol {
         let border = CALayer()
         let width = CGFloat(1.0)
         border.borderColor = UIColor(white: 0.13, alpha: 1).cgColor
-        border.frame = CGRect(x: 0, y: weekCollectionView.frame.size.height - width, width: weekCollectionView.frame.size.width, height: weekCollectionView.frame.size.height)
+        border.frame = CGRect(x: 0, y: weekCollectionView.frame.size.height - width, width: weekCollectionView.frame.size.width * 2, height: weekCollectionView.frame.size.height) // *2 for scroll
         
         border.borderWidth = width
         weekCollectionView.layer.addSublayer(border)

@@ -10,13 +10,13 @@ import UIKit
 
 protocol TimetableViewProtocol: class, TimetableRendererProtocol, TimetableGesturerProtocol, TimetableReloaderProtocol {
     
-    func changeDay(toIndex: Int, translation: CGFloat)
+    func changeDay(toIndex: Int, transform: CGAffineTransform)
     
 }
 
 extension TimetableViewController: TimetableViewProtocol {
     
-    @objc func changeDay(toIndex: Int, translation: CGFloat) {
+    @objc func changeDay(toIndex: Int, transform: CGAffineTransform) {
         
         let fromIndex = selectedDay
         
@@ -35,8 +35,8 @@ extension TimetableViewController: TimetableViewProtocol {
         dayTableView.alpha = 0
         reloadDayTableData(animated: false, {})
         
-        renderedPrevImageView.transform = CGAffineTransform(translationX: translation, y: 0)
-        renderedNextImageView.transform = CGAffineTransform(translationX: -tableWidthTranslation + translation, y: 0)
+        renderedPrevImageView.transform = transform
+        renderedNextImageView.transform = CGAffineTransform(translationX: -tableWidthTranslation + transform.tx, y: 0)
         
         renderedPrevImageView.image = presenter.dayFrame(atIndex: fromIndex)
         renderedPrevImageView.alpha = 1
@@ -50,7 +50,7 @@ extension TimetableViewController: TimetableViewProtocol {
         
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
             
-            self.renderedPrevImageView.transform = CGAffineTransform(translationX: tableWidthTranslation, y: 0)
+            self.renderedPrevImageView.transform = CGAffineTransform(translationX: tableWidthTranslation, y: 0).scaledBy(x: 0.7, y: 0.7)
             self.renderedNextImageView.transform = CGAffineTransform(translationX: 0, y: 0)
             
         }) { (_) in

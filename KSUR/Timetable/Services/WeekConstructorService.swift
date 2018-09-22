@@ -9,13 +9,17 @@
 import UIKit
 
 protocol WeekConstructorServiceProtocol {
+    
     var activeCell: Int { get set }
     
-    var week: [Day] { get set }
-    var weekCells: [Int: TimetableDayCollectionViewCell] { get set }
+    var even: Bool { get set }
+    func setEven(_ to: Bool)
     
-    func day(atIndex: Int) -> Day?
-    func dayCell(atIndex: Int, isActive: Bool) -> TimetableDayCollectionViewCell?
+    var weeks: [Bool: [Day]] { get set }
+    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] { get set }
+    
+    func day(atIndex: Int, even: Bool) -> Day?
+    func dayCell(atIndex: Int, isActive: Bool, even: Bool) -> TimetableDayCollectionViewCell?
     
     func constructCells(active: Int)
     func updateActiveCell(toIndex: Int)
@@ -23,19 +27,22 @@ protocol WeekConstructorServiceProtocol {
 
 class WeekConstructorService: WeekConstructorServiceProtocol {
     
-    var weekCells: [Int: TimetableDayCollectionViewCell] = [:]
-    
-    var week = [
-        Day("Понедельник", date: "23 июня"),
-        Day("Вторник", date: "24 июня"),
-        Day("Среда", date: "25 июня"),
-        Day("Четверг", date: "26 июня"),
-        Day("Пятница", date: "27 июня")
-    ]
-    
     var activeCell = 0
     
-    func day(atIndex: Int) -> Day? {
+    var even: Bool = false
+    
+    func setEven(_ to: Bool) {
+        even = to
+    }
+    
+    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] = [:]
+    
+    var weeks = [Bool: [Day]]()
+    
+    func day(atIndex: Int, even: Bool) -> Day? {
+        
+        guard let week = weeks[even] else { return nil }
+        
         if week.indices.contains(atIndex) {
             return week[atIndex]
         } else {
@@ -43,9 +50,9 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
         }
     }
     
-    func dayCell(atIndex: Int, isActive: Bool) -> TimetableDayCollectionViewCell? {
+    func dayCell(atIndex: Int, isActive: Bool, even: Bool) -> TimetableDayCollectionViewCell? {
         
-        guard let day = self.day(atIndex: atIndex) else {
+        guard let day = self.day(atIndex: atIndex, even: even) else {
             return nil
         }
         
@@ -80,13 +87,24 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
     
     func constructCells(active: Int) {
         
-        var i = 0
-        
-        for _ in week {
+        for week in weeks {
             
-            weekCells[i] = dayCell(atIndex: i, isActive: (i == active ? true : false))
+            var i = 0
             
-            i += 1
+            let e = week.key
+            
+            var wc = [Int: TimetableDayCollectionViewCell]()
+            
+            for _ in week.value {
+                
+                wc[i] = dayCell(atIndex: i, isActive: (i == active ? true : false), even: e)
+                
+                i += 1
+                
+            }
+            
+            weeksCells[e] = wc
+            
         }
     }
     
@@ -94,8 +112,10 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
         
         if toIndex != activeCell {
             
-            weekCells[activeCell] = self.dayCell(atIndex: activeCell, isActive: false)
-            weekCells[toIndex] = self.dayCell(atIndex: toIndex, isActive: true)
+            guard var weekCells = weeksCells[self.even] else { return }
+            
+            weekCells[activeCell] = self.dayCell(atIndex: activeCell, isActive: false, even: self.even)
+            weekCells[toIndex] = self.dayCell(atIndex: toIndex, isActive: true, even: self.even)
             
             activeCell = toIndex
             
@@ -104,6 +124,71 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
     }
     
     init() {
-        self.constructCells(active: activeCell)
+        
+        let now = Date()
+        
+        var startDate = Date()
+        var interval: TimeInterval = 0
+        
+        if Calendar.current.dateInterval(of: .weekOfYear, start: &startDate, interval: &interval, for: now) {
+            
+            var actualWeek = [Day]()
+            var nextWeek = [Day]()
+            
+            var i = 0
+            
+            while i < 5 {
+                
+                let titleFormatter : DateFormatter = DateFormatter()
+                titleFormatter.dateFormat = "EEEE" // ex. Monday
+                
+                let dateFormatter : DateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd MMM" // ex. 17 Sep
+                
+                guard let date = Calendar.current.date(byAdding: .day, value: +i, to: startDate) else { return }
+                let dateString = dateFormatter.string(from: date)
+                let titleString = titleFormatter.string(from: date)
+                
+                let d = Day(titleString, date: dateString)
+                
+                
+                
+                 actualWeek.append(d)
+                
+                i += 1
+                
+            }
+            
+            i += 2
+            
+            while i < 12 {
+                
+                let titleFormatter : DateFormatter = DateFormatter()
+                titleFormatter.dateFormat = "EEEE" // ex. Monday
+                
+                let dateFormatter : DateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd MMM" // ex. 17 Sep
+                
+                guard let date = Calendar.current.date(byAdding: .day, value: +i, to: startDate) else { return }
+                let dateString = dateFormatter.string(from: date)
+                let titleString = titleFormatter.string(from: date)
+                
+                let d = Day(titleString, date: dateString)
+                
+                
+                
+                nextWeek.append(d)
+                
+                i += 1
+                
+            }
+            
+            weeks[self.even] = actualWeek
+            weeks[!self.even] = nextWeek
+            
+            self.constructCells(active: activeCell)
+            
+        }
+        
     }
 }

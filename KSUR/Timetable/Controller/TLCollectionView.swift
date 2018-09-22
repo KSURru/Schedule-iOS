@@ -31,7 +31,7 @@ extension TimetableViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if tCell.titleLabel == nil || tCell.dateLabel == nil {
+        if tCell.titleLabel != dayCell.titleLabel && tCell.dateLabel != dayCell.dateLabel {
             
             tCell.titleLabel = dayCell.titleLabel
             tCell.dateLabel = dayCell.dateLabel
@@ -46,7 +46,7 @@ extension TimetableViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        changeDay(toIndex: indexPath.item, translation: 0)
+        changeDay(toIndex: indexPath.item, transform: CGAffineTransform(translationX: 0, y: 0))
         
     }
 }

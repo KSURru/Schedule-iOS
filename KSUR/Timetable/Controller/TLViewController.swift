@@ -78,6 +78,7 @@ class TimetableViewController: UIViewController {
             completion: nil
         )
         
+        reloadWeekCollectionData(animated: true, {})
         reloadDayTableData(animated: true, {})
         
     }

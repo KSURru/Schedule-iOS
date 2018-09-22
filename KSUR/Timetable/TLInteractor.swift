@@ -12,10 +12,12 @@ protocol TimetableInteractorProtocol: class {
     
     var apiService: APIServiceProtocol { get }
     
-    var weekCells: [Int: TimetableDayCollectionViewCell] { get }
+    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] { get }
     func updateActiveDayCell(toIndex: Int)
     
     var actualEven: Bool! { set get }
+    var even: Bool { set get }
+    
     
     func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
     func lessonCell(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
@@ -54,9 +56,9 @@ class TimetableInteractor: TimetableInteractorProtocol {
         
     }
     
-    var weekCells: [Int: TimetableDayCollectionViewCell] {
+    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] {
         get {
-            return weekConstructorService.weekCells
+            return weekConstructorService.weeksCells
         }
     }
     
@@ -65,6 +67,7 @@ class TimetableInteractor: TimetableInteractorProtocol {
     }
     
     var actualEven: Bool!
+    var even: Bool = false
     
     func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell? {
         return dayConstructorService.lessonFrame(atIndex: atIndex, atDay: atDay)
@@ -103,7 +106,12 @@ class TimetableInteractor: TimetableInteractorProtocol {
     }
     
     func setEven(_ to: Bool) {
+        
+        self.even = to
+        
+        weekConstructorService.setEven(to)
         dayConstructorService.setEven(to)
+        
     }
     
 }

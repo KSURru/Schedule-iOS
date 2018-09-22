@@ -13,7 +13,7 @@ protocol TimetablePresenterProtocol: class {
     func configureView()
     
     var weekCount: Int { get }
-    var weekCells: [Int: TimetableDayCollectionViewCell] { get }
+    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] { get }
     
     var actualEven: Bool! { set get }
     
@@ -47,12 +47,16 @@ class TimetablePresenter: TimetablePresenterProtocol {
     var router: TimetableRouterProtocol!
     
     var weekCount: Int {
+        
+        guard let weekCells = weeksCells[interactor!.even] else { return 0 }
+        
         return weekCells.count
+        
     }
     
-    var weekCells: [Int: TimetableDayCollectionViewCell] {
+    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] {
         get {
-            return interactor!.weekCells
+            return interactor!.weeksCells
         }
     }
     
@@ -69,19 +73,27 @@ class TimetablePresenter: TimetablePresenterProtocol {
     }
     
     func dayCell(atIndex: IndexPath) -> TimetableDayCollectionViewCell? {
+        
+        guard let weekCells = weeksCells[interactor.even] else { return nil }
+        
         guard let dayCell = weekCells[atIndex.item] else {
             return nil
         }
         
         return dayCell
+        
     }
 
     func sizeForDayCell(atIndex: IndexPath) -> CGSize {
+        
+        guard let weekCells = weeksCells[interactor.even] else { return CGSize.zero }
+        
         guard let dayCell = weekCells[atIndex.item] else {
             return CGSize.zero
         }
         
         return dayCell.frame.size
+        
     }
     
     func updateActiveDayCell(toIndex: Int) {
@@ -156,7 +168,7 @@ class TimetablePresenter: TimetablePresenterProtocol {
             })
             
         }
-        view.reloadWeekCollectionData()
+        view.reloadWeekCollectionData(animated: true, {})
         view.renderWeekCollectionViewBorder()
         view.createPanGestureRecognizer()
     }

@@ -10,20 +10,20 @@ import UIKit
 
 protocol TimetableGesturerProtocol {
     
-    func leftSwipe(_ translation: CGFloat)
-    func rightSwipe(_ translation: CGFloat)
+    func leftSwipe(_ transform: CGAffineTransform)
+    func rightSwipe(_ transform: CGAffineTransform)
     func createPanGestureRecognizer()
     
 }
 
 extension TimetableViewController: TimetableGesturerProtocol {
     
-    @objc func leftSwipe(_ translation: CGFloat) {
-        _ = selectedDay == presenter.weekCount - 1 ? changeDay(toIndex: 0, translation: -translation) : changeDay(toIndex: selectedDay + 1, translation: -translation)
+    @objc func leftSwipe(_ transform: CGAffineTransform) {
+        _ = selectedDay == presenter.weekCount - 1 ? changeDay(toIndex: 0, transform: transform) : changeDay(toIndex: selectedDay + 1, transform: transform)
     }
     
-    @objc func rightSwipe(_ translation: CGFloat) {
-        _ = selectedDay == 0 ? changeDay(toIndex: presenter.weekCount - 1, translation: translation) : changeDay(toIndex: selectedDay - 1, translation: translation)
+    @objc func rightSwipe(_ transform: CGAffineTransform) {
+        _ = selectedDay == 0 ? changeDay(toIndex: presenter.weekCount - 1, transform: transform) : changeDay(toIndex: selectedDay - 1, transform: transform)
     }
     
     func createPanGestureRecognizer() {
@@ -69,8 +69,14 @@ extension TimetableViewController: TimetableGesturerProtocol {
         let fromIndex = selectedDay
         var toIndex = selectedDay
         
+        let translationX = self.renderedPrevImageView.transform.tx + translation.x
+        
+        let scale = 1.0 - 0.3 * abs( translationX / dayTableView.frame.size.width )
+        
+        let transform = CGAffineTransform(translationX: translationX, y: 0).scaledBy(x: scale, y: scale)
+        
         self.renderedPrevImageView.image = presenter.dayFrame(atIndex: fromIndex)
-        self.renderedPrevImageView.transform = CGAffineTransform(translationX: self.renderedPrevImageView.transform.tx + translation.x, y: 0)
+        self.renderedPrevImageView.transform = transform
         self.renderedPrevImageView.alpha = 1
         
         if self.renderedPrevImageView.transform.tx > -10 && self.renderedPrevImageView.transform.tx < 10 {
@@ -116,7 +122,7 @@ extension TimetableViewController: TimetableGesturerProtocol {
         isPanX = false
         
         if abs(self.renderedPrevImageView.transform.tx) > (UIScreen.main.bounds.size.width / 5) {
-            if direction == 1 { leftSwipe(abs(self.renderedPrevImageView.transform.tx)) } else { rightSwipe(abs(self.renderedPrevImageView.transform.tx)) }
+            if direction == 1 { leftSwipe(self.renderedPrevImageView.transform) } else { rightSwipe(self.renderedPrevImageView.transform) }
         } else {
             
             UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {

@@ -12,9 +12,11 @@ protocol DayConstructorServiceProtocol {
     
     var apiService: APIServiceProtocol { get }
     
-    var days: [Bool : [LessonsDayProtocol?]] { get set }
-    var group: LessonsGroupProtocol? { get set }
     var even: Bool { get set }
+    func setEven(_ to: Bool)
+    
+    var days: [Bool: [LessonsDayProtocol?]] { get set }
+    var group: LessonsGroupProtocol? { get set }
     
     func day(atIndex: Int) -> LessonsDayProtocol?
     func section(atIndex: Int, atDay: Int) -> LessonsSectionProtocol?
@@ -37,17 +39,20 @@ protocol DayConstructorServiceProtocol {
     
     func constructCells()
     
-    func setEven(_ to: Bool)
-    
 }
 
 class DayConstructorService: DayConstructorServiceProtocol {
     
     let apiService: APIServiceProtocol
     
-    var days = [Bool : [LessonsDayProtocol?]]()
+    var even: Bool = false
+    
+    func setEven(_ to: Bool) {
+        even = to
+    }
+    
+    var days = [Bool: [LessonsDayProtocol?]]()
     var group: LessonsGroupProtocol?
-    var even = false
     
     func day(atIndex: Int) -> LessonsDayProtocol? {
         
@@ -269,10 +274,6 @@ class DayConstructorService: DayConstructorServiceProtocol {
             
         }
         
-    }
-    
-    func setEven(_ to: Bool) {
-        even = to
     }
     
     init(api: APIServiceProtocol) {
