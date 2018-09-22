@@ -72,16 +72,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnV-rw-mRM">
                                 <rect key="frame" x="0.0" y="673" width="414" height="63"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-wR-zlM">
+                                    <segmentedControl opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-wR-zlM">
                                         <rect key="frame" x="107" y="17.666666666666629" width="200" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="HPH-AB-TPx"/>
                                         </constraints>
                                         <segments>
-                                            <segment title="Нечетная"/>
-                                            <segment title="Четная"/>
+                                            <segment title=""/>
+                                            <segment title=""/>
                                         </segments>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.0" green="0.87058823529999996" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="evenSegmentedValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="b7w-z1-nFG"/>
                                         </connections>

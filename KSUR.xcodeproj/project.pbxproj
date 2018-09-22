@@ -8,30 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93F921068BAD0016114F /* StringSizeExtension.swift */; };
-		C32D93FD210690CC0016114F /* TTLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* TTLessonTableViewCell.swift */; };
+		C32D93FD210690CC0016114F /* TLLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* TLLessonTableViewCell.swift */; };
 		C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FE210693680016114F /* WeekConstructorService.swift */; };
 		C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DD5F521331A0500117FD6 /* main.pb.swift */; };
+		C34249362155CEDC00017684 /* TLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34249352155CEDC00017684 /* TLRenderer.swift */; };
+		C34249382155D12B00017684 /* TLGesturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34249372155D12B00017684 /* TLGesturer.swift */; };
+		C342493A2155D1CE00017684 /* TLReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34249392155D1CE00017684 /* TLReloader.swift */; };
 		C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25322103F95F00FBEF53 /* AppDelegate.swift */; };
 		C35B25382103F95F00FBEF53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B25362103F95F00FBEF53 /* Main.storyboard */; };
 		C35B253D2103F96000FBEF53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35B253C2103F96000FBEF53 /* Assets.xcassets */; };
 		C35B25402103F96000FBEF53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B253E2103F96000FBEF53 /* LaunchScreen.storyboard */; };
 		C35B254B2103F96000FBEF53 /* KSURTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B254A2103F96000FBEF53 /* KSURTests.swift */; };
 		C35B25562103F96000FBEF53 /* KSURUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25552103F96000FBEF53 /* KSURUITests.swift */; };
-		C35B25642103FDAE00FBEF53 /* TTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25632103FDAE00FBEF53 /* TTViewController.swift */; };
-		C35B25662103FE0300FBEF53 /* TTConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25652103FE0300FBEF53 /* TTConfigurator.swift */; };
-		C35B25692103FF1300FBEF53 /* TTPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25682103FF1300FBEF53 /* TTPresenter.swift */; };
-		C38765BC210F447300987C25 /* TTTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BB210F447300987C25 /* TTTableView.swift */; };
-		C38765BE210F44BE00987C25 /* TTCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BD210F44BE00987C25 /* TTCollectionView.swift */; };
+		C35B25642103FDAE00FBEF53 /* TLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25632103FDAE00FBEF53 /* TLViewController.swift */; };
+		C35B25662103FE0300FBEF53 /* TLConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25652103FE0300FBEF53 /* TLConfigurator.swift */; };
+		C35B25692103FF1300FBEF53 /* TLPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25682103FF1300FBEF53 /* TLPresenter.swift */; };
+		C38765BC210F447300987C25 /* TLTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BB210F447300987C25 /* TLTableView.swift */; };
+		C38765BE210F44BE00987C25 /* TLCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BD210F44BE00987C25 /* TLCollectionView.swift */; };
 		C39B330D2107360F0008370E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330C2107360F0008370E /* Day.swift */; };
 		C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330E2107399C0008370E /* DayConstructorService.swift */; };
 		C39B331121073A290008370E /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331021073A290008370E /* Lesson.swift */; };
-		C39B331321073AB30008370E /* TTDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331221073AB30008370E /* TTDayCollectionViewCell.swift */; };
-		C3A15EF62113AAAD0056C8BB /* TTViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15EF52113AAAD0056C8BB /* TTViewControllerProtocol.swift */; };
+		C39B331321073AB30008370E /* TLDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331221073AB30008370E /* TLDayCollectionViewCell.swift */; };
+		C3A15EF62113AAAD0056C8BB /* TLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15EF52113AAAD0056C8BB /* TLView.swift */; };
 		C3CEE448211911CA00CF6846 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */; };
 		C3CEE44B211912F900CF6846 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44A211912F900CF6846 /* APIService.swift */; };
 		C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44E21191DC000CF6846 /* DeserializerService.swift */; };
-		C3CFC3C82104015300A999A4 /* TTRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C72104015300A999A4 /* TTRouter.swift */; };
-		C3CFC3CA2104021100A999A4 /* TTInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C92104021100A999A4 /* TTInteractor.swift */; };
+		C3CFC3C82104015300A999A4 /* TLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C72104015300A999A4 /* TLRouter.swift */; };
+		C3CFC3CA2104021100A999A4 /* TLInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFC3C92104021100A999A4 /* TLInteractor.swift */; };
 		C3DFCAFC210A040800EAA5AF /* RenderedImageTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DFCAFB210A040800EAA5AF /* RenderedImageTableViewExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,9 +57,12 @@
 
 /* Begin PBXFileReference section */
 		C32D93F921068BAD0016114F /* StringSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSizeExtension.swift; sourceTree = "<group>"; };
-		C32D93FC210690CC0016114F /* TTLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTLessonTableViewCell.swift; sourceTree = "<group>"; };
+		C32D93FC210690CC0016114F /* TLLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLLessonTableViewCell.swift; sourceTree = "<group>"; };
 		C32D93FE210693680016114F /* WeekConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekConstructorService.swift; sourceTree = "<group>"; };
 		C33DD5F521331A0500117FD6 /* main.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.pb.swift; path = Proto/main.pb.swift; sourceTree = SOURCE_ROOT; };
+		C34249352155CEDC00017684 /* TLRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLRenderer.swift; sourceTree = "<group>"; };
+		C34249372155D12B00017684 /* TLGesturer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLGesturer.swift; sourceTree = "<group>"; };
+		C34249392155D1CE00017684 /* TLReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLReloader.swift; sourceTree = "<group>"; };
 		C35B252F2103F95F00FBEF53 /* KSUR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSUR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B25322103F95F00FBEF53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C35B25372103F95F00FBEF53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,21 +75,21 @@
 		C35B25512103F96000FBEF53 /* KSURUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSURUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B25552103F96000FBEF53 /* KSURUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSURUITests.swift; sourceTree = "<group>"; };
 		C35B25572103F96000FBEF53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C35B25632103FDAE00FBEF53 /* TTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTViewController.swift; sourceTree = "<group>"; };
-		C35B25652103FE0300FBEF53 /* TTConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTConfigurator.swift; sourceTree = "<group>"; };
-		C35B25682103FF1300FBEF53 /* TTPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTPresenter.swift; sourceTree = "<group>"; };
-		C38765BB210F447300987C25 /* TTTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTableView.swift; sourceTree = "<group>"; };
-		C38765BD210F44BE00987C25 /* TTCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TTCollectionView.swift; path = Entities/TTCollectionView.swift; sourceTree = "<group>"; };
+		C35B25632103FDAE00FBEF53 /* TLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLViewController.swift; sourceTree = "<group>"; };
+		C35B25652103FE0300FBEF53 /* TLConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLConfigurator.swift; sourceTree = "<group>"; };
+		C35B25682103FF1300FBEF53 /* TLPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLPresenter.swift; sourceTree = "<group>"; };
+		C38765BB210F447300987C25 /* TLTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTableView.swift; sourceTree = "<group>"; };
+		C38765BD210F44BE00987C25 /* TLCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCollectionView.swift; sourceTree = "<group>"; };
 		C39B330C2107360F0008370E /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		C39B330E2107399C0008370E /* DayConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayConstructorService.swift; sourceTree = "<group>"; };
 		C39B331021073A290008370E /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
-		C39B331221073AB30008370E /* TTDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTDayCollectionViewCell.swift; sourceTree = "<group>"; };
-		C3A15EF52113AAAD0056C8BB /* TTViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTViewControllerProtocol.swift; sourceTree = "<group>"; };
+		C39B331221073AB30008370E /* TLDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		C3A15EF52113AAAD0056C8BB /* TLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLView.swift; sourceTree = "<group>"; };
 		C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
 		C3CEE44A211912F900CF6846 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C3CEE44E21191DC000CF6846 /* DeserializerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializerService.swift; sourceTree = "<group>"; };
-		C3CFC3C72104015300A999A4 /* TTRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTRouter.swift; sourceTree = "<group>"; };
-		C3CFC3C92104021100A999A4 /* TTInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTInteractor.swift; sourceTree = "<group>"; };
+		C3CFC3C72104015300A999A4 /* TLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLRouter.swift; sourceTree = "<group>"; };
+		C3CFC3C92104021100A999A4 /* TLInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLInteractor.swift; sourceTree = "<group>"; };
 		C3DFCAFB210A040800EAA5AF /* RenderedImageTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedImageTableViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +126,20 @@
 				C3DFCAFB210A040800EAA5AF /* RenderedImageTableViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C342493B2155D28300017684 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C35B25632103FDAE00FBEF53 /* TLViewController.swift */,
+				C3A15EF52113AAAD0056C8BB /* TLView.swift */,
+				C34249352155CEDC00017684 /* TLRenderer.swift */,
+				C34249372155D12B00017684 /* TLGesturer.swift */,
+				C34249392155D1CE00017684 /* TLReloader.swift */,
+				C38765BD210F44BE00987C25 /* TLCollectionView.swift */,
+				C38765BB210F447300987C25 /* TLTableView.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C35B25262103F95F00FBEF53 = {
@@ -179,14 +199,11 @@
 		C35B25672103FEF500FBEF53 /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
-				C35B25632103FDAE00FBEF53 /* TTViewController.swift */,
-				C3A15EF52113AAAD0056C8BB /* TTViewControllerProtocol.swift */,
-				C38765BD210F44BE00987C25 /* TTCollectionView.swift */,
-				C38765BB210F447300987C25 /* TTTableView.swift */,
-				C35B25652103FE0300FBEF53 /* TTConfigurator.swift */,
-				C35B25682103FF1300FBEF53 /* TTPresenter.swift */,
-				C3CFC3C72104015300A999A4 /* TTRouter.swift */,
-				C3CFC3C92104021100A999A4 /* TTInteractor.swift */,
+				C342493B2155D28300017684 /* Controller */,
+				C35B25652103FE0300FBEF53 /* TLConfigurator.swift */,
+				C35B25682103FF1300FBEF53 /* TLPresenter.swift */,
+				C3CFC3C72104015300A999A4 /* TLRouter.swift */,
+				C3CFC3C92104021100A999A4 /* TLInteractor.swift */,
 				C36AC8A72107EF5D007991A5 /* Services */,
 				C36AC8A82107EF70007991A5 /* Entities */,
 			);
@@ -207,8 +224,8 @@
 		C36AC8A82107EF70007991A5 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C32D93FC210690CC0016114F /* TTLessonTableViewCell.swift */,
-				C39B331221073AB30008370E /* TTDayCollectionViewCell.swift */,
+				C32D93FC210690CC0016114F /* TLLessonTableViewCell.swift */,
+				C39B331221073AB30008370E /* TLDayCollectionViewCell.swift */,
 				C39B331021073A290008370E /* Lesson.swift */,
 				C39B330C2107360F0008370E /* Day.swift */,
 			);
@@ -382,24 +399,27 @@
 			files = (
 				C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */,
 				C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */,
-				C3CFC3C82104015300A999A4 /* TTRouter.swift in Sources */,
-				C38765BE210F44BE00987C25 /* TTCollectionView.swift in Sources */,
-				C35B25662103FE0300FBEF53 /* TTConfigurator.swift in Sources */,
+				C3CFC3C82104015300A999A4 /* TLRouter.swift in Sources */,
+				C38765BE210F44BE00987C25 /* TLCollectionView.swift in Sources */,
+				C35B25662103FE0300FBEF53 /* TLConfigurator.swift in Sources */,
+				C342493A2155D1CE00017684 /* TLReloader.swift in Sources */,
 				C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */,
-				C3A15EF62113AAAD0056C8BB /* TTViewControllerProtocol.swift in Sources */,
+				C34249382155D12B00017684 /* TLGesturer.swift in Sources */,
+				C3A15EF62113AAAD0056C8BB /* TLView.swift in Sources */,
 				C3DFCAFC210A040800EAA5AF /* RenderedImageTableViewExtension.swift in Sources */,
-				C3CFC3CA2104021100A999A4 /* TTInteractor.swift in Sources */,
+				C3CFC3CA2104021100A999A4 /* TLInteractor.swift in Sources */,
 				C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */,
-				C35B25692103FF1300FBEF53 /* TTPresenter.swift in Sources */,
+				C35B25692103FF1300FBEF53 /* TLPresenter.swift in Sources */,
 				C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */,
-				C35B25642103FDAE00FBEF53 /* TTViewController.swift in Sources */,
+				C35B25642103FDAE00FBEF53 /* TLViewController.swift in Sources */,
 				C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */,
-				C39B331321073AB30008370E /* TTDayCollectionViewCell.swift in Sources */,
+				C34249362155CEDC00017684 /* TLRenderer.swift in Sources */,
+				C39B331321073AB30008370E /* TLDayCollectionViewCell.swift in Sources */,
 				C39B331121073A290008370E /* Lesson.swift in Sources */,
 				C39B330D2107360F0008370E /* Day.swift in Sources */,
-				C32D93FD210690CC0016114F /* TTLessonTableViewCell.swift in Sources */,
+				C32D93FD210690CC0016114F /* TLLessonTableViewCell.swift in Sources */,
 				C3CEE44B211912F900CF6846 /* APIService.swift in Sources */,
-				C38765BC210F447300987C25 /* TTTableView.swift in Sources */,
+				C38765BC210F447300987C25 /* TLTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

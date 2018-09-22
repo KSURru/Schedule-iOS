@@ -1,5 +1,5 @@
 //
-//  TimetableInteractor.swift
+//  TLInteractor.swift
 //  KSUR
 //
 //  Created by Nikita Arutyunov on 22.07.2018.
@@ -14,6 +14,8 @@ protocol TimetableInteractorProtocol: class {
     
     var weekCells: [Int: TimetableDayCollectionViewCell] { get }
     func updateActiveDayCell(toIndex: Int)
+    
+    var actualEven: Bool! { set get }
     
     func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
     func lessonCell(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
@@ -61,6 +63,8 @@ class TimetableInteractor: TimetableInteractorProtocol {
     func updateActiveDayCell(toIndex: Int) {
         weekConstructorService.updateActiveCell(toIndex: toIndex)
     }
+    
+    var actualEven: Bool!
     
     func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell? {
         return dayConstructorService.lessonFrame(atIndex: atIndex, atDay: atDay)

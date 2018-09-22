@@ -1,5 +1,5 @@
 //
-//  TimetableViewControllerTableView.swift
+//  TLTableView.swift
 //  KSUR
 //
 //  Created by Nikita Arutyunov on 30.07.2018.

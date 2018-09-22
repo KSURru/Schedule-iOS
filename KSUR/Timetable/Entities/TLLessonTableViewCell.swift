@@ -1,6 +1,6 @@
 
 //
-//  TimetableLessonTableViewCell.swift
+//  TLLessonTableViewCell.swift
 //  KSUR
 //
 //  Created by Nikita Arutyunov on 24.07.2018.

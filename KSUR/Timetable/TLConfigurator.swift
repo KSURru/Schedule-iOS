@@ -1,5 +1,5 @@
 //
-//  TimetableConfigurator.swift
+//  TLConfigurator.swift
 //  KSUR
 //
 //  Created by Nikita Arutyunov on 22.07.2018.

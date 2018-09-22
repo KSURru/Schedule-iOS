@@ -1,5 +1,5 @@
 //
-//  TimetableViewController.swift
+//  TLViewController.swift
 //  KSUR
 //
 //  Created by Nikita Arutyunov on 22.07.2018.
@@ -7,19 +7,6 @@
 //
 
 import UIKit
-
-protocol TimetableViewProtocol: class {
-    func reloadWeekCollectionData()
-    func reloadDayTableData(animated: Bool, _ completion: @escaping (() -> Void))
-    func addBorderToWeekCollectionView()
-    func changeDay(toIndex: Int, translation: CGFloat)
-    func leftSwipe(_ translation: CGFloat)
-    func rightSwipe(_ translation: CGFloat)
-    func createPanGestureRecognizer()
-    func renderDayImage(from dayId: Int, to endDayId: Int, inversed: Bool, _ completion: @escaping (() -> Void))
-    func renderWeekImages(even: Bool, _ completion: @escaping (() -> Void))
-    func renderTableViewImages(even: Bool, _ completion: @escaping (() -> Void))
-}
 
 class TimetableViewController: UIViewController {
     
@@ -36,8 +23,8 @@ class TimetableViewController: UIViewController {
     let configurator: TimetableConfiguratorProtocol = TimetableConfigurator()
     
     var selectedDay = 0
+    
     var isPanX = false
-    let maxX = UIScreen.main.bounds.size.width
     var direction = 0
 
     override func viewDidLoad() {
@@ -77,6 +64,7 @@ class TimetableViewController: UIViewController {
     @IBAction func evenSegmentedValueChanged(_ sender: Any) {
         
         let isEven = evenSegmented.selectedSegmentIndex == 1
+        let actualEven = presenter.actualEven
         
         presenter.setEven(isEven)
         
@@ -86,7 +74,7 @@ class TimetableViewController: UIViewController {
             usingSpringWithDamping: 0.45,
             initialSpringVelocity: 0.45,
             options: [.allowUserInteraction, .beginFromCurrentState],
-            animations: { self.evenSegmented.tintColor = isEven ? UIColor(red: 0, green: 0.869, blue: 0.717, alpha: 1) : UIColor(white: 1, alpha: 1) },
+            animations: { self.evenSegmented.tintColor = isEven == actualEven ? UIColor(red: 0, green: 0.869, blue: 0.717, alpha: 1) : UIColor(white: 1, alpha: 1) },
             completion: nil
         )
         

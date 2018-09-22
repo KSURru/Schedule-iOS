@@ -1,5 +1,5 @@
 //
-//  TimetablePresenter.swift
+//  TLPresenter.swift
 //  KSUR
 //
 //  Created by Nikita Arutyunov on 22.07.2018.
@@ -14,6 +14,8 @@ protocol TimetablePresenterProtocol: class {
     
     var weekCount: Int { get }
     var weekCells: [Int: TimetableDayCollectionViewCell] { get }
+    
+    var actualEven: Bool! { set get }
     
     func dayCell(atIndex: IndexPath) -> TimetableDayCollectionViewCell?
     func sizeForDayCell(atIndex: IndexPath) -> CGSize
@@ -52,6 +54,18 @@ class TimetablePresenter: TimetablePresenterProtocol {
         get {
             return interactor!.weekCells
         }
+    }
+    
+    var actualEven: Bool! {
+        
+        set {
+            interactor.actualEven = newValue
+        }
+        
+        get {
+            return interactor.actualEven
+        }
+        
     }
     
     func dayCell(atIndex: IndexPath) -> TimetableDayCollectionViewCell? {
@@ -133,13 +147,17 @@ class TimetablePresenter: TimetablePresenterProtocol {
     func configureView() {
         interactor.apiService.isEven { (e) in
             
+            self.actualEven = e
+            
             self.view.renderTableViewImages(even: e, {
-                // Do smth after rendering
+                
+                self.view.renderSegmentedControl(even: e)
+                
             })
             
         }
         view.reloadWeekCollectionData()
-        view.addBorderToWeekCollectionView()
+        view.renderWeekCollectionViewBorder()
         view.createPanGestureRecognizer()
     }
 }
