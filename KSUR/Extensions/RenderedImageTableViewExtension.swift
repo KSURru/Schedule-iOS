@@ -10,45 +10,41 @@ import UIKit
 
 extension UITableView {
     
-    var renderedImage: UIImage? {
+    func renderedImage(completion: (UIImage?) -> Void) {
         
-        get {
+        if Int(self.contentOffset.y) == 0 {
             
-            if Int(self.contentOffset.y) == 0 {
-                
-                UIGraphicsBeginImageContextWithOptions(CGSize(width: self.contentSize.width, height: self.contentSize.height - self.contentOffset.y), false, 0.0)
-                
-                let context = UIGraphicsGetCurrentContext()
-                let previousFrame = self.frame
-                
-                self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.contentSize.width, height: self.contentSize.height)
-                self.layer.render(in: context!)
-                
-                self.frame = previousFrame
-                
-                let image = UIGraphicsGetImageFromCurrentImageContext()!
-                UIGraphicsEndImageContext()
-
-                return image
-                
-            } else {
-                
-                let contentOffset = self.contentOffset
-                
-                UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0.0)
-                
-                let context = UIGraphicsGetCurrentContext()
-                
-                context?.translateBy(x: 0, y: -contentOffset.y)
-                
-                self.layer.render(in: context!)
-                
-                let image = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                
-                return image
-                
-            }
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: self.contentSize.width, height: self.contentSize.height - self.contentOffset.y), false, 0.0)
+            
+            let context = UIGraphicsGetCurrentContext()
+            let previousFrame = self.frame
+            
+            self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.contentSize.width, height: self.contentSize.height)
+            self.layer.render(in: context!)
+            
+            self.frame = previousFrame
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            
+            completion(image)
+            
+        } else {
+            
+            let contentOffset = self.contentOffset
+            
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0.0)
+            
+            let context = UIGraphicsGetCurrentContext()
+            
+            context?.translateBy(x: 0, y: -contentOffset.y)
+            
+            self.layer.render(in: context!)
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            completion(image)
             
         }
         

@@ -19,6 +19,7 @@ protocol APIServiceProtocol: class {
     
     func getGroup(atIndex: Int) -> LessonsGroupProtocol?
     func getWeek(group: Int, even: Bool) -> LessonsWeekProtocol?
+    func isEven(completion: @escaping (Bool) -> Void)
     
 }
 
@@ -79,6 +80,21 @@ class APIService: APIServiceProtocol {
             return nil
             
         }
+        
+    }
+    
+    func isEven(completion: @escaping (Bool) -> Void) {
+        
+        let urlString = "http://\(host):\(port)/v\(version)/even"
+        guard let url = URL(string: urlString) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { _, response, _ in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 735 { completion(true) } else if httpResponse.statusCode == 635 { completion(false) }
+            }
+        }
+        
+        task.resume()
         
     }
     

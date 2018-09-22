@@ -131,7 +131,13 @@ class TimetablePresenter: TimetablePresenterProtocol {
     }
     
     func configureView() {
-        view.renderTableViewImages()
+        interactor.apiService.isEven { (e) in
+            
+            self.view.renderTableViewImages(even: e, {
+                // Do smth after rendering
+            })
+            
+        }
         view.reloadWeekCollectionData()
         view.addBorderToWeekCollectionView()
         view.createPanGestureRecognizer()

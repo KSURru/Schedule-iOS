@@ -10,14 +10,15 @@ import UIKit
 
 protocol TimetableViewProtocol: class {
     func reloadWeekCollectionData()
-    func reloadDayTableData(animated: Bool)
+    func reloadDayTableData(animated: Bool, _ completion: @escaping (() -> Void))
     func addBorderToWeekCollectionView()
     func changeDay(toIndex: Int, translation: CGFloat)
     func leftSwipe(_ translation: CGFloat)
     func rightSwipe(_ translation: CGFloat)
     func createPanGestureRecognizer()
-    func renderWeekImages(even: Bool, completion: @escaping (() -> Void))
-    func renderTableViewImages()
+    func renderDayImage(from dayId: Int, to endDayId: Int, inversed: Bool, _ completion: @escaping (() -> Void))
+    func renderWeekImages(even: Bool, _ completion: @escaping (() -> Void))
+    func renderTableViewImages(even: Bool, _ completion: @escaping (() -> Void))
 }
 
 class TimetableViewController: UIViewController {
@@ -62,6 +63,8 @@ class TimetableViewController: UIViewController {
         frame.size.height = .leastNormalMagnitude
         dayTableView.tableHeaderView = UIView(frame: frame)
         dayTableView.backgroundColor = UIColor(white: 0.05, alpha: 1)
+        dayTableView.transform = CGAffineTransform(translationX: dayTableView.frame.size.width, y: 0)
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -87,7 +90,7 @@ class TimetableViewController: UIViewController {
             completion: nil
         )
         
-        reloadDayTableData(animated: true)
+        reloadDayTableData(animated: true, {})
         
     }
     

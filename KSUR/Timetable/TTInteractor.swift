@@ -10,6 +10,8 @@ import UIKit
 
 protocol TimetableInteractorProtocol: class {
     
+    var apiService: APIServiceProtocol { get }
+    
     var weekCells: [Int: TimetableDayCollectionViewCell] { get }
     func updateActiveDayCell(toIndex: Int)
     
@@ -47,6 +49,7 @@ class TimetableInteractor: TimetableInteractorProtocol {
 //        apiService = APIService(host: "0.0.0.0", port: 8081, version: 1, deserializer: deserializerService) // local
         weekConstructorService = WeekConstructorService()
         dayConstructorService = DayConstructorService(api: apiService)
+        
     }
     
     var weekCells: [Int: TimetableDayCollectionViewCell] {
