@@ -10,13 +10,18 @@ import UIKit
 
 class TimetableViewController: UIViewController {
     
-    @IBOutlet weak var dayTableView: UITableView!
     @IBOutlet weak var weekCollectionView: UICollectionView!
-    @IBOutlet weak var renderedPrevImageView: UIImageView!
-    @IBOutlet weak var renderedNextImageView: UIImageView!
+    
     @IBOutlet weak var prevView: UIView!
+    @IBOutlet weak var renderedPrevImageView: UIImageView!
+    
     @IBOutlet weak var nextView: UIView!
+    @IBOutlet weak var renderedNextImageView: UIImageView!
+    
+    @IBOutlet weak var dayTableView: UITableView!
+    
     @IBOutlet weak var loaderView: UIActivityIndicatorView!
+    
     @IBOutlet weak var evenSegmented: UISegmentedControl!
     
     var presenter: TimetablePresenterProtocol!
@@ -37,7 +42,7 @@ class TimetableViewController: UIViewController {
         
         weekCollectionView.delegate = self
         weekCollectionView.dataSource = self
-        weekCollectionView.register(TimetableDayCollectionViewCell.self, forCellWithReuseIdentifier: "dayCell")
+        weekCollectionView.register(TimetableWeekdayCollectionViewCell.self, forCellWithReuseIdentifier: "weekdayCell")
         weekCollectionView.backgroundColor = UIColor(white: 0.05, alpha: 1)
         
         renderedPrevImageView.backgroundColor = UIColor(white: 0.05, alpha: 1)
@@ -63,10 +68,10 @@ class TimetableViewController: UIViewController {
     
     @IBAction func evenSegmentedValueChanged(_ sender: Any) {
         
-        let isEven = evenSegmented.selectedSegmentIndex == 1
-        let actualEven = presenter.actualEven
+        let weekType = evenSegmented.selectedSegmentIndex == 1 ? WeekType.even : WeekType.odd
+        let currentWeekType = presenter.currentWeekType
         
-        presenter.setEven(isEven)
+        presenter.setWeekType(weekType)
         
         UIView.animate(
             withDuration: 0.45,
@@ -74,7 +79,7 @@ class TimetableViewController: UIViewController {
             usingSpringWithDamping: 0.45,
             initialSpringVelocity: 0.45,
             options: [.allowUserInteraction, .beginFromCurrentState],
-            animations: { self.evenSegmented.tintColor = isEven == actualEven ? UIColor(red: 0, green: 0.869, blue: 0.717, alpha: 1) : UIColor(white: 1, alpha: 1) },
+            animations: { self.evenSegmented.tintColor = weekType == currentWeekType ? UIColor(red: 0, green: 0.869, blue: 0.717, alpha: 1) : UIColor(white: 1, alpha: 1) },
             completion: nil
         )
         
@@ -82,6 +87,7 @@ class TimetableViewController: UIViewController {
         reloadDayTableData(animated: true, {})
         
     }
+    
     
 }
 

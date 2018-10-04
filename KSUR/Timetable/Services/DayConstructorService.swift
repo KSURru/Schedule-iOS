@@ -12,32 +12,29 @@ protocol DayConstructorServiceProtocol {
     
     var apiService: APIServiceProtocol { get }
     
-    var even: Bool { get set }
-    func setEven(_ to: Bool)
-    
-    var days: [Bool: [LessonsDayProtocol?]] { get set }
+    var days: [WeekType: [LessonsDayProtocol?]] { get set } // even/odd
     var group: LessonsGroupProtocol? { get set }
     
-    func day(atIndex: Int) -> LessonsDayProtocol?
-    func section(atIndex: Int, atDay: Int) -> LessonsSectionProtocol?
+    func day(atIndex: Int, weekType: WeekType) -> LessonsDayProtocol?
+    func section(atIndex: Int, atDay: Int, weekType: WeekType) -> LessonsSectionProtocol?
     
-    func lesson(atIndex: IndexPath, atDay: Int) -> LessonProtocol?
-    func lessonCell(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
-    func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
+    func lesson(atIndex: IndexPath, atDay: Int, weekType: WeekType) -> LessonProtocol?
+    func lessonCell(atIndex: IndexPath, atDay: Int, weekType: WeekType) -> TimetableLessonTableViewCell?
+    func lessonFrame(atIndex: IndexPath, atDay: Int, weekType: WeekType) -> TimetableLessonTableViewCell?
     
-    func lessonsCount(atSection: Int, atDay: Int) -> Int
-    func daySectionsCount(atDay: Int) -> Int
+    func lessonsCount(atSection: Int, atDay: Int, weekType: WeekType) -> Int
+    func daySectionsCount(atDay: Int, weekType: WeekType) -> Int
     
-    func sectionHeaderTitle(atIndex: Int, atDay: Int) -> String?
-    func sectionHeaderFrame(atIndex: Int, atDay: Int) -> UIView?
+    func sectionHeaderTitle(atIndex: Int, atDay: Int, weekType: WeekType) -> String?
+    func sectionHeaderFrame(atIndex: Int, atDay: Int, weekType: WeekType) -> UIView?
     
-    func dayFrame(atIndex: Int) -> UIImage?
-    func dayFrame(atIndex: Int, setFrame: UIImage?)
-    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?)
+    func dayFrame(atIndex: Int, weekType: WeekType) -> UIImage?
+    func dayFrame(atIndex: Int, setFrame: UIImage?, weekType: WeekType)
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?, weekType: WeekType)
     
-    func dayScrollOffset(atIndex: Int) -> CGFloat?
+    func dayScrollOffset(atIndex: Int, weekType: WeekType) -> CGFloat?
     
-    func constructCells()
+    func constructCells(weekType: WeekType)
     
 }
 
@@ -45,40 +42,34 @@ class DayConstructorService: DayConstructorServiceProtocol {
     
     let apiService: APIServiceProtocol
     
-    var even: Bool = false
-    
-    func setEven(_ to: Bool) {
-        even = to
-    }
-    
-    var days = [Bool: [LessonsDayProtocol?]]()
+    var days = [WeekType: [LessonsDayProtocol?]]()
     var group: LessonsGroupProtocol?
     
-    func day(atIndex: Int) -> LessonsDayProtocol? {
+    func day(atIndex: Int, weekType: WeekType) -> LessonsDayProtocol? {
         
-        guard let days = self.days[self.even] else { return nil }
+        guard let days = self.days[weekType] else { return nil }
         guard let day = days.filter( { $0?.id == atIndex } ).first else { return nil }
         
         return day
     }
     
-    func section(atIndex: Int, atDay: Int) -> LessonsSectionProtocol? {
-        guard let day = day(atIndex: atDay) else { return nil }
+    func section(atIndex: Int, atDay: Int, weekType: WeekType) -> LessonsSectionProtocol? {
+        guard let day = day(atIndex: atDay, weekType: weekType) else { return nil }
         guard let section = day.sections.filter( { $0?.id == atIndex } ).first else { return nil }
         
         return section
     }
     
-    func lesson(atIndex: IndexPath, atDay: Int) -> LessonProtocol? {
-        guard let section = section(atIndex: atIndex.section, atDay: atDay) else { return nil }
+    func lesson(atIndex: IndexPath, atDay: Int, weekType: WeekType) -> LessonProtocol? {
+        guard let section = section(atIndex: atIndex.section, atDay: atDay, weekType: weekType) else { return nil }
         guard let lesson = (section.lessons.filter { $0?.id == atIndex.item }).first else { return nil }
         
         return lesson
     }
     
-    func lessonCell(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell? {
+    func lessonCell(atIndex: IndexPath, atDay: Int, weekType: WeekType) -> TimetableLessonTableViewCell? {
         
-        guard let lesson = self.lesson(atIndex: atIndex, atDay: atDay) else { return nil }
+        guard let lesson = self.lesson(atIndex: atIndex, atDay: atDay, weekType: weekType) else { return nil }
         
         let timeLabel = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: lesson.time.width(withConstrainedHeight: 22, font: .systemFont(ofSize: 18, weight: .bold)), height: 22)))
         timeLabel.text = lesson.time
@@ -158,32 +149,32 @@ class DayConstructorService: DayConstructorServiceProtocol {
         return lessonCell
     }
     
-    func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell? {
-        guard let lesson = lesson(atIndex: atIndex, atDay: atDay) else { return nil }
+    func lessonFrame(atIndex: IndexPath, atDay: Int, weekType: WeekType) -> TimetableLessonTableViewCell? {
+        guard let lesson = lesson(atIndex: atIndex, atDay: atDay, weekType: weekType) else { return nil }
 
         return lesson.frame
     }
     
-    func lessonsCount(atSection: Int, atDay: Int) -> Int {
-        guard let section = section(atIndex: atSection, atDay: atDay) else { return 0 }
+    func lessonsCount(atSection: Int, atDay: Int, weekType: WeekType) -> Int {
+        guard let section = section(atIndex: atSection, atDay: atDay, weekType: weekType) else { return 0 }
         
         return section.lessons.count
     }
     
-    func daySectionsCount(atDay: Int) -> Int {
-        guard let sections = day(atIndex: atDay)?.sections else { return 0 }
+    func daySectionsCount(atDay: Int, weekType: WeekType) -> Int {
+        guard let sections = day(atIndex: atDay, weekType: weekType)?.sections else { return 0 }
         
         return sections.count
     }
     
-    func sectionHeaderTitle(atIndex: Int, atDay: Int) -> String? {
-        guard let section = section(atIndex: atIndex, atDay: atDay) else { return nil }
+    func sectionHeaderTitle(atIndex: Int, atDay: Int, weekType: WeekType) -> String? {
+        guard let section = section(atIndex: atIndex, atDay: atDay, weekType: weekType) else { return nil }
         
         return section.header.title
     }
     
-    func sectionHeaderFrame(atIndex: Int, atDay: Int) -> UIView? {
-        guard let title = sectionHeaderTitle(atIndex: atIndex, atDay: atDay) else { return nil }
+    func sectionHeaderFrame(atIndex: Int, atDay: Int, weekType: WeekType) -> UIView? {
+        guard let title = sectionHeaderTitle(atIndex: atIndex, atDay: atDay, weekType: weekType) else { return nil }
         
         let headerView = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: UIScreen.main.bounds.size.width, height: 68)))
         headerView.backgroundColor = UIColor(white: 0.05, alpha: 1)
@@ -208,15 +199,15 @@ class DayConstructorService: DayConstructorServiceProtocol {
         return headerView
     }
     
-    func dayFrame(atIndex: Int) -> UIImage? {
-        guard let day = day(atIndex: atIndex) else { return nil }
+    func dayFrame(atIndex: Int, weekType: WeekType) -> UIImage? {
+        guard let day = day(atIndex: atIndex, weekType: weekType) else { return nil }
         
         return day.scrollOffset < 10 ? day.frame : day.scrolledFrame
     }
     
-    func dayFrame(atIndex: Int, setFrame frame: UIImage?) {
+    func dayFrame(atIndex: Int, setFrame frame: UIImage?, weekType: WeekType) {
         
-        guard let days = self.days[self.even] else { return }
+        guard let days = self.days[weekType] else { return }
         
         if atIndex < days.count {
             days[atIndex]!.frame = frame
@@ -224,9 +215,9 @@ class DayConstructorService: DayConstructorServiceProtocol {
         
     }
     
-    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?) {
+    func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?, weekType: WeekType) {
         
-        guard let days = self.days[self.even] else { return }
+        guard let days = self.days[weekType] else { return }
         
         if atIndex < days.count {
             
@@ -238,25 +229,25 @@ class DayConstructorService: DayConstructorServiceProtocol {
         
     }
     
-    func dayScrollOffset(atIndex: Int) -> CGFloat? {
+    func dayScrollOffset(atIndex: Int, weekType: WeekType) -> CGFloat? {
         
-        guard let day = day(atIndex: atIndex) else { return nil }
+        guard let day = day(atIndex: atIndex, weekType: weekType) else { return nil }
         
         return day.scrollOffset
         
     }
     
-    func constructCells() {
+    func constructCells(weekType: WeekType) {
         
-        guard let days = self.days[self.even] else { return }
+        guard let days = self.days[weekType] else { return }
         
         for day in days {
             
-            let lastSection = daySectionsCount(atDay: day!.id) - 1
+            let lastSection = daySectionsCount(atDay: day!.id, weekType: weekType) - 1
             
             for section in day!.sections {
                 
-                guard let headerView = sectionHeaderFrame(atIndex: section!.id, atDay: day!.id) else { return }
+                guard let headerView = sectionHeaderFrame(atIndex: section!.id, atDay: day!.id, weekType: weekType) else { return }
                 
                 section!.header.frame = headerView
                 
@@ -265,7 +256,7 @@ class DayConstructorService: DayConstructorServiceProtocol {
                     _ = section!.id == lastSection ? lesson?.separator = false : nil
 
                     let indexPath = IndexPath(item: lesson!.id, section: section!.id)
-                    guard let lessonCell = self.lessonCell(atIndex: indexPath, atDay: day!.id) else { return }
+                    guard let lessonCell = self.lessonCell(atIndex: indexPath, atDay: day!.id, weekType: weekType) else { return }
                     lesson!.frame = lessonCell
 
                 }
@@ -287,10 +278,11 @@ class DayConstructorService: DayConstructorServiceProtocol {
         
         self.group = group
         
-        self.days[true] = evenDays
-        self.days[false] = oddDays
+        self.days[.even] = evenDays
+        self.days[.odd] = oddDays
         
-        self.constructCells()
+        self.constructCells(weekType: .even)
+        self.constructCells(weekType: .odd)
     }
     
 }

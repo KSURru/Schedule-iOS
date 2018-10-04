@@ -17,7 +17,7 @@ extension TimetableViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let tCell = cell as! TimetableDayCollectionViewCell
+        let tCell = cell as! TimetableWeekdayCollectionViewCell
         
         tCell.isActive = indexPath.item == selectedDay
         
@@ -25,11 +25,9 @@ extension TimetableViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let tCell = weekCollectionView.dequeueReusableCell(withReuseIdentifier: "dayCell", for: indexPath) as! TimetableDayCollectionViewCell
+        let tCell = weekCollectionView.dequeueReusableCell(withReuseIdentifier: "weekdayCell", for: indexPath) as! TimetableWeekdayCollectionViewCell
         
-        guard let dayCell = presenter.dayCell(atIndex: indexPath) else {
-            return UICollectionViewCell()
-        }
+        guard let dayCell = presenter.weekdayFrame(atIndex: indexPath.item) else { return UICollectionViewCell() }
         
         if tCell.titleLabel != dayCell.titleLabel && tCell.dateLabel != dayCell.dateLabel {
             
@@ -46,13 +44,13 @@ extension TimetableViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        changeDay(toIndex: indexPath.item, transform: CGAffineTransform(translationX: 0, y: 0))
+        changeDay(toIndex: indexPath.item, animation: .auto, prevTransform: CGAffineTransform(), nextTransform: CGAffineTransform())
         
     }
 }
 
 extension TimetableViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return presenter.sizeForDayCell(atIndex: indexPath)
+        return presenter.sizeForWeekdayCell(atIndex: indexPath.item)
     }
 }

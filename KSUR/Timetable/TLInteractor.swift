@@ -12,12 +12,13 @@ protocol TimetableInteractorProtocol: class {
     
     var apiService: APIServiceProtocol { get }
     
-    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] { get }
-    func updateActiveDayCell(toIndex: Int)
+    var currentWeekType: WeekType { set get }
+    var weekType: WeekType { set get }
     
-    var actualEven: Bool! { set get }
-    var even: Bool { set get }
+    var weekCount: Int { get }
     
+    func weekdayFrame(atIndex: Int) -> TimetableWeekdayCollectionViewCell?
+    func updateActiveWeekdayCell(toIndex: Int)
     
     func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
     func lessonCell(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell?
@@ -33,7 +34,7 @@ protocol TimetableInteractorProtocol: class {
     
     func dayScrollOffset(atIndex: Int) -> CGFloat?
     
-    func setEven(_ to: Bool)
+    func setWeekType(_ to: WeekType)
 }
 
 class TimetableInteractor: TimetableInteractorProtocol {
@@ -56,61 +57,60 @@ class TimetableInteractor: TimetableInteractorProtocol {
         
     }
     
-    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] {
-        get {
-            return weekConstructorService.weeksCells
-        }
+    func weekdayFrame(atIndex: Int) -> TimetableWeekdayCollectionViewCell? {
+        return weekConstructorService.weekdayFrame(atIndex: atIndex, weekPeriod: (weekType && currentWeekType))
     }
     
-    func updateActiveDayCell(toIndex: Int) {
-        weekConstructorService.updateActiveCell(toIndex: toIndex)
+    func updateActiveWeekdayCell(toIndex: Int) {
+        weekConstructorService.updateActiveCell(toIndex: toIndex, weekPeriod: (weekType && currentWeekType))
     }
     
-    var actualEven: Bool!
-    var even: Bool = false
+    var currentWeekType: WeekType = .none
+    var weekType: WeekType = .none
+    
+    var weekCount: Int {
+        return weekConstructorService.weekCount(weekPeriod: (weekType && currentWeekType))
+    }
     
     func lessonFrame(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell? {
-        return dayConstructorService.lessonFrame(atIndex: atIndex, atDay: atDay)
+        return dayConstructorService.lessonFrame(atIndex: atIndex, atDay: atDay, weekType: weekType)
     }
     
     func lessonCell(atIndex: IndexPath, atDay: Int) -> TimetableLessonTableViewCell? {
-        return dayConstructorService.lessonCell(atIndex: atIndex, atDay: atDay)
+        return dayConstructorService.lessonCell(atIndex: atIndex, atDay: atDay, weekType: weekType)
     }
     
     func lessonsCount(atSection: Int, atDay: Int) -> Int {
-        return dayConstructorService.lessonsCount(atSection: atSection, atDay: atDay)
+        return dayConstructorService.lessonsCount(atSection: atSection, atDay: atDay, weekType: weekType)
     }
     
     func daySectionsCount(atDay: Int) -> Int {
-        return dayConstructorService.daySectionsCount(atDay: atDay)
+        return dayConstructorService.daySectionsCount(atDay: atDay, weekType: weekType)
     }
     
     func sectionHeaderFrame(atIndex: Int, atDay: Int) -> UIView? {
-        return dayConstructorService.sectionHeaderFrame(atIndex: atIndex, atDay: atDay)
+        return dayConstructorService.sectionHeaderFrame(atIndex: atIndex, atDay: atDay, weekType: weekType)
     }
     
     func dayFrame(atIndex: Int) -> UIImage? {
-        return dayConstructorService.dayFrame(atIndex: atIndex)
+        return dayConstructorService.dayFrame(atIndex: atIndex, weekType: weekType)
     }
     
     func dayFrame(atIndex: Int, setFrame: UIImage?) {
-        dayConstructorService.dayFrame(atIndex: atIndex, setFrame: setFrame)
+        dayConstructorService.dayFrame(atIndex: atIndex, setFrame: setFrame, weekType: weekType)
     }
     
     func dayFrame(atIndex: Int, setScrollOffset: CGFloat, setScrolledFrame: UIImage?) {
-        dayConstructorService.dayFrame(atIndex: atIndex, setScrollOffset: setScrollOffset, setScrolledFrame: setScrolledFrame)
+        dayConstructorService.dayFrame(atIndex: atIndex, setScrollOffset: setScrollOffset, setScrolledFrame: setScrolledFrame, weekType: weekType)
     }
     
     func dayScrollOffset(atIndex: Int) -> CGFloat? {
-        return dayConstructorService.dayScrollOffset(atIndex: atIndex)
+        return dayConstructorService.dayScrollOffset(atIndex: atIndex, weekType: weekType)
     }
     
-    func setEven(_ to: Bool) {
+    func setWeekType(_ to: WeekType) {
         
-        self.even = to
-        
-        weekConstructorService.setEven(to)
-        dayConstructorService.setEven(to)
+        self.weekType = to
         
     }
     

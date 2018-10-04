@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C301CFA321593E1C0005783F /* CornerStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C301CFA221593E1C0005783F /* CornerStickers.swift */; };
+		C3057DF42166659A00E216A1 /* Timetable.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3057DF32166659A00E216A1 /* Timetable.xib */; };
+		C3057DF62166670B00E216A1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3057DF52166670B00E216A1 /* LaunchScreen.xib */; };
 		C32D93FA21068BAD0016114F /* StringSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93F921068BAD0016114F /* StringSizeExtension.swift */; };
 		C32D93FD210690CC0016114F /* TLLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FC210690CC0016114F /* TLLessonTableViewCell.swift */; };
 		C32D93FF210693680016114F /* WeekConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D93FE210693680016114F /* WeekConstructorService.swift */; };
@@ -15,9 +18,7 @@
 		C34249382155D12B00017684 /* TLGesturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34249372155D12B00017684 /* TLGesturer.swift */; };
 		C342493A2155D1CE00017684 /* TLReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34249392155D1CE00017684 /* TLReloader.swift */; };
 		C35B25332103F95F00FBEF53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25322103F95F00FBEF53 /* AppDelegate.swift */; };
-		C35B25382103F95F00FBEF53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B25362103F95F00FBEF53 /* Main.storyboard */; };
 		C35B253D2103F96000FBEF53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35B253C2103F96000FBEF53 /* Assets.xcassets */; };
-		C35B25402103F96000FBEF53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35B253E2103F96000FBEF53 /* LaunchScreen.storyboard */; };
 		C35B254B2103F96000FBEF53 /* KSURTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B254A2103F96000FBEF53 /* KSURTests.swift */; };
 		C35B25562103F96000FBEF53 /* KSURUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25552103F96000FBEF53 /* KSURUITests.swift */; };
 		C35B25642103FDAE00FBEF53 /* TLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25632103FDAE00FBEF53 /* TLViewController.swift */; };
@@ -25,11 +26,12 @@
 		C35B25692103FF1300FBEF53 /* TLPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B25682103FF1300FBEF53 /* TLPresenter.swift */; };
 		C38765BC210F447300987C25 /* TLTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BB210F447300987C25 /* TLTableView.swift */; };
 		C38765BE210F44BE00987C25 /* TLCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38765BD210F44BE00987C25 /* TLCollectionView.swift */; };
-		C39B330D2107360F0008370E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330C2107360F0008370E /* Day.swift */; };
+		C39B330D2107360F0008370E /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330C2107360F0008370E /* Weekday.swift */; };
 		C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B330E2107399C0008370E /* DayConstructorService.swift */; };
 		C39B331121073A290008370E /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331021073A290008370E /* Lesson.swift */; };
 		C39B331321073AB30008370E /* TLDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39B331221073AB30008370E /* TLDayCollectionViewCell.swift */; };
 		C3A15EF62113AAAD0056C8BB /* TLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15EF52113AAAD0056C8BB /* TLView.swift */; };
+		C3A5939421583D01003AD8BA /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A5939321583D01003AD8BA /* Week.swift */; };
 		C3CEE448211911CA00CF6846 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */; };
 		C3CEE44B211912F900CF6846 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44A211912F900CF6846 /* APIService.swift */; };
 		C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CEE44E21191DC000CF6846 /* DeserializerService.swift */; };
@@ -56,6 +58,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C301CFA221593E1C0005783F /* CornerStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerStickers.swift; sourceTree = "<group>"; };
+		C3057DF32166659A00E216A1 /* Timetable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Timetable.xib; sourceTree = "<group>"; };
+		C3057DF52166670B00E216A1 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		C32D93F921068BAD0016114F /* StringSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSizeExtension.swift; sourceTree = "<group>"; };
 		C32D93FC210690CC0016114F /* TLLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLLessonTableViewCell.swift; sourceTree = "<group>"; };
 		C32D93FE210693680016114F /* WeekConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekConstructorService.swift; sourceTree = "<group>"; };
@@ -65,9 +70,7 @@
 		C34249392155D1CE00017684 /* TLReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLReloader.swift; sourceTree = "<group>"; };
 		C35B252F2103F95F00FBEF53 /* KSUR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSUR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B25322103F95F00FBEF53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C35B25372103F95F00FBEF53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C35B253C2103F96000FBEF53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C35B253F2103F96000FBEF53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C35B25412103F96000FBEF53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C35B25462103F96000FBEF53 /* KSURTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KSURTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B254A2103F96000FBEF53 /* KSURTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSURTests.swift; sourceTree = "<group>"; };
@@ -80,11 +83,12 @@
 		C35B25682103FF1300FBEF53 /* TLPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLPresenter.swift; sourceTree = "<group>"; };
 		C38765BB210F447300987C25 /* TLTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTableView.swift; sourceTree = "<group>"; };
 		C38765BD210F44BE00987C25 /* TLCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCollectionView.swift; sourceTree = "<group>"; };
-		C39B330C2107360F0008370E /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		C39B330C2107360F0008370E /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		C39B330E2107399C0008370E /* DayConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayConstructorService.swift; sourceTree = "<group>"; };
 		C39B331021073A290008370E /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		C39B331221073AB30008370E /* TLDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3A15EF52113AAAD0056C8BB /* TLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLView.swift; sourceTree = "<group>"; };
+		C3A5939321583D01003AD8BA /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		C3CEE447211911CA00CF6846 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
 		C3CEE44A211912F900CF6846 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C3CEE44E21191DC000CF6846 /* DeserializerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializerService.swift; sourceTree = "<group>"; };
@@ -168,9 +172,8 @@
 			children = (
 				C33DD5F521331A0500117FD6 /* main.pb.swift */,
 				C35B25322103F95F00FBEF53 /* AppDelegate.swift */,
-				C35B25362103F95F00FBEF53 /* Main.storyboard */,
 				C35B253C2103F96000FBEF53 /* Assets.xcassets */,
-				C35B253E2103F96000FBEF53 /* LaunchScreen.storyboard */,
+				C3057DF52166670B00E216A1 /* LaunchScreen.xib */,
 				C35B25412103F96000FBEF53 /* Info.plist */,
 				C35B25672103FEF500FBEF53 /* Timetable */,
 				C32D93FB21068BBB0016114F /* Extensions */,
@@ -199,6 +202,7 @@
 		C35B25672103FEF500FBEF53 /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
+				C3057DF32166659A00E216A1 /* Timetable.xib */,
 				C342493B2155D28300017684 /* Controller */,
 				C35B25652103FE0300FBEF53 /* TLConfigurator.swift */,
 				C35B25682103FF1300FBEF53 /* TLPresenter.swift */,
@@ -227,7 +231,9 @@
 				C32D93FC210690CC0016114F /* TLLessonTableViewCell.swift */,
 				C39B331221073AB30008370E /* TLDayCollectionViewCell.swift */,
 				C39B331021073A290008370E /* Lesson.swift */,
-				C39B330C2107360F0008370E /* Day.swift */,
+				C39B330C2107360F0008370E /* Weekday.swift */,
+				C3A5939321583D01003AD8BA /* Week.swift */,
+				C301CFA221593E1C0005783F /* CornerStickers.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -348,9 +354,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C35B25402103F96000FBEF53 /* LaunchScreen.storyboard in Resources */,
+				C3057DF42166659A00E216A1 /* Timetable.xib in Resources */,
+				C3057DF62166670B00E216A1 /* LaunchScreen.xib in Resources */,
 				C35B253D2103F96000FBEF53 /* Assets.xcassets in Resources */,
-				C35B25382103F95F00FBEF53 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,12 +417,14 @@
 				C39B330F2107399C0008370E /* DayConstructorService.swift in Sources */,
 				C35B25692103FF1300FBEF53 /* TLPresenter.swift in Sources */,
 				C3CEE44F21191DC000CF6846 /* DeserializerService.swift in Sources */,
+				C301CFA321593E1C0005783F /* CornerStickers.swift in Sources */,
 				C35B25642103FDAE00FBEF53 /* TLViewController.swift in Sources */,
 				C33DD5F621331A0500117FD6 /* main.pb.swift in Sources */,
 				C34249362155CEDC00017684 /* TLRenderer.swift in Sources */,
+				C3A5939421583D01003AD8BA /* Week.swift in Sources */,
 				C39B331321073AB30008370E /* TLDayCollectionViewCell.swift in Sources */,
 				C39B331121073A290008370E /* Lesson.swift in Sources */,
-				C39B330D2107360F0008370E /* Day.swift in Sources */,
+				C39B330D2107360F0008370E /* Weekday.swift in Sources */,
 				C32D93FD210690CC0016114F /* TLLessonTableViewCell.swift in Sources */,
 				C3CEE44B211912F900CF6846 /* APIService.swift in Sources */,
 				C38765BC210F447300987C25 /* TLTableView.swift in Sources */,
@@ -453,25 +461,6 @@
 			targetProxy = C35B25522103F96000FBEF53 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C35B25362103F95F00FBEF53 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C35B25372103F95F00FBEF53 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C35B253E2103F96000FBEF53 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C35B253F2103F96000FBEF53 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C35B25582103F96000FBEF53 /* Debug */ = {

@@ -10,20 +10,20 @@ import UIKit
 
 protocol TimetableGesturerProtocol {
     
-    func leftSwipe(_ transform: CGAffineTransform)
-    func rightSwipe(_ transform: CGAffineTransform)
+    func leftSwipe(_ prevTransform: CGAffineTransform, _ nextTransform: CGAffineTransform)
+    func rightSwipe(_ prevTransform: CGAffineTransform, _ nextTransform: CGAffineTransform)
     func createPanGestureRecognizer()
     
 }
 
 extension TimetableViewController: TimetableGesturerProtocol {
     
-    @objc func leftSwipe(_ transform: CGAffineTransform) {
-        _ = selectedDay == presenter.weekCount - 1 ? changeDay(toIndex: 0, transform: transform) : changeDay(toIndex: selectedDay + 1, transform: transform)
+    @objc func leftSwipe(_ prevTransform: CGAffineTransform, _ nextTransform: CGAffineTransform) {
+        _ = selectedDay == presenter.weekCount - 1 ? changeDay(toIndex: 0, animation: .manual, prevTransform: prevTransform, nextTransform: nextTransform) : changeDay(toIndex: selectedDay + 1, animation: .manual, prevTransform: prevTransform, nextTransform: nextTransform)
     }
     
-    @objc func rightSwipe(_ transform: CGAffineTransform) {
-        _ = selectedDay == 0 ? changeDay(toIndex: presenter.weekCount - 1, transform: transform) : changeDay(toIndex: selectedDay - 1, transform: transform)
+    @objc func rightSwipe(_ prevTransform: CGAffineTransform, _ nextTransform: CGAffineTransform) {
+        _ = selectedDay == 0 ? changeDay(toIndex: presenter.weekCount - 1, animation: .manual, prevTransform: prevTransform, nextTransform: nextTransform) : changeDay(toIndex: selectedDay - 1, animation: .manual, prevTransform: prevTransform, nextTransform: nextTransform)
     }
     
     func createPanGestureRecognizer() {
@@ -71,9 +71,11 @@ extension TimetableViewController: TimetableGesturerProtocol {
         
         let translationX = self.renderedPrevImageView.transform.tx + translation.x
         
-        let scale = 1.0 - 0.3 * abs( translationX / dayTableView.frame.size.width )
+        let ratio = abs( translationX / dayTableView.frame.size.width )
         
-        let transform = CGAffineTransform(translationX: translationX, y: 0).scaledBy(x: scale, y: scale)
+        let prevScale = 1.0 - 0.3 * ratio
+        
+        let transform = CGAffineTransform(translationX: translationX, y: 0).scaledBy(x: prevScale, y: prevScale)
         
         self.renderedPrevImageView.image = presenter.dayFrame(atIndex: fromIndex)
         self.renderedPrevImageView.transform = transform
@@ -85,15 +87,38 @@ extension TimetableViewController: TimetableGesturerProtocol {
             
         }
         
+        var isCorner = false
+        
         if translation.x > 0 {
             
             toIndex = selectedDay == 0 ? presenter.weekCount - 1 : selectedDay - 1
             
             if direction == 0 {
+                
                 direction = -1
-                self.renderedNextImageView.image = presenter.dayFrame(atIndex: toIndex)
-                self.renderedNextImageView.transform = CGAffineTransform(translationX: self.dayTableView.frame.size.width * CGFloat(direction), y: 0)
-                self.renderedNextImageView.alpha = 1
+                
+                isCorner = selectedDay == 0
+                
+                if isCorner {
+                    
+                    let r = Int.random(in: 0..<cornerStickers[.left]!.count)
+                    
+                    self.renderedNextImageView.image = cornerStickers[.left]![r]
+                    self.renderedNextImageView.backgroundColor = .clear
+                    renderedNextImageView.contentMode = .center
+                    self.renderedNextImageView.transform = CGAffineTransform(translationX: self.dayTableView.frame.size.width * CGFloat(direction), y: 0).scaledBy(x: 0.7, y: 0.7)
+                    self.renderedNextImageView.alpha = 1
+                    
+                } else {
+                    
+                    self.renderedNextImageView.image = presenter.dayFrame(atIndex: toIndex)
+                    renderedNextImageView.backgroundColor = UIColor(white: 0.05, alpha: 1)
+                    renderedNextImageView.contentMode = .top
+                    self.renderedNextImageView.transform = CGAffineTransform(translationX: self.dayTableView.frame.size.width * CGFloat(direction), y: 0).scaledBy(x: 0.7, y: 0.7)
+                    self.renderedNextImageView.alpha = 1
+                    
+                }
+                
             }
             
         } else if translation.x < 0 {
@@ -101,15 +126,41 @@ extension TimetableViewController: TimetableGesturerProtocol {
             toIndex = selectedDay == presenter.weekCount - 1 ? 0 : selectedDay + 1
             
             if direction == 0 {
+                
                 direction = 1
-                self.renderedNextImageView.image = presenter.dayFrame(atIndex: toIndex)
-                self.renderedNextImageView.transform = CGAffineTransform(translationX: self.dayTableView.frame.size.width * CGFloat(direction), y: 0)
-                self.renderedNextImageView.alpha = 1
+                
+                isCorner = selectedDay == presenter.weekCount - 1
+                
+                if isCorner {
+                    
+                    let r = Int.random(in: 0..<cornerStickers[.right]!.count)
+                    
+                    self.renderedNextImageView.image = cornerStickers[.right]![r]
+                    self.renderedNextImageView.backgroundColor = .clear
+                    renderedNextImageView.contentMode = .center
+                    self.renderedNextImageView.transform = CGAffineTransform(translationX: self.dayTableView.frame.size.width * CGFloat(direction), y: 0).scaledBy(x: 0.7, y: 0.7)
+                    self.renderedNextImageView.alpha = 1
+                    
+                } else {
+                    
+                    self.renderedNextImageView.image = presenter.dayFrame(atIndex: toIndex)
+                    renderedNextImageView.backgroundColor = UIColor(white: 0.05, alpha: 1)
+                    renderedNextImageView.contentMode = .top
+                    self.renderedNextImageView.transform = CGAffineTransform(translationX: self.dayTableView.frame.size.width * CGFloat(direction), y: 0).scaledBy(x: 0.7, y: 0.7)
+                    self.renderedNextImageView.alpha = 1
+                    
+                }
+                
             }
             
         }
         
-        self.renderedNextImageView.transform = CGAffineTransform(translationX: self.renderedNextImageView.transform.tx + translation.x, y: 0)
+        let nextTranslationX = self.renderedNextImageView.transform.tx + translation.x
+        let nextTranslationY = CGFloat(0) //400 - 400 * ratio
+        
+        let nextScale = isCorner ? 1.0 : 0.7 + 0.3 * ratio
+        
+        self.renderedNextImageView.transform = CGAffineTransform(translationX: nextTranslationX, y: nextTranslationY).scaledBy(x: nextScale, y: nextScale)
         
         recognizer.setTranslation(.zero, in: recognizer.view!)
         
@@ -121,8 +172,8 @@ extension TimetableViewController: TimetableGesturerProtocol {
         
         isPanX = false
         
-        if abs(self.renderedPrevImageView.transform.tx) > (UIScreen.main.bounds.size.width / 5) {
-            if direction == 1 { leftSwipe(self.renderedPrevImageView.transform) } else { rightSwipe(self.renderedPrevImageView.transform) }
+        if abs(self.renderedPrevImageView.transform.tx) > (UIScreen.main.bounds.size.width / 5) && !(selectedDay == presenter.weekCount - 1 && direction == 1) && !(selectedDay == 0 && direction != 1) {
+            if direction == 1 { leftSwipe(self.renderedPrevImageView.transform, self.renderedNextImageView.transform) } else { rightSwipe(self.renderedPrevImageView.transform, self.renderedNextImageView.transform) }
         } else {
             
             UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {

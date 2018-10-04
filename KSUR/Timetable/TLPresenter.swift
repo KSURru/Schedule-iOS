@@ -13,13 +13,13 @@ protocol TimetablePresenterProtocol: class {
     func configureView()
     
     var weekCount: Int { get }
-    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] { get }
     
-    var actualEven: Bool! { set get }
+    var currentWeekType: WeekType! { set get }
+    func setWeekType(_ to: WeekType)
     
-    func dayCell(atIndex: IndexPath) -> TimetableDayCollectionViewCell?
-    func sizeForDayCell(atIndex: IndexPath) -> CGSize
-    func updateActiveDayCell(toIndex: Int)
+    func weekdayFrame(atIndex: Int) -> TimetableWeekdayCollectionViewCell?
+    func sizeForWeekdayCell(atIndex: Int) -> CGSize
+    func updateActiveWeekdayCell(toIndex: Int)
     
     func lessonsCount(atSection: Int, atDay: Int) -> Int
     func daySectionsCount(atDay: Int) -> Int
@@ -37,7 +37,6 @@ protocol TimetablePresenterProtocol: class {
     
     func dayScrollOffset(atIndex: Int) -> CGFloat?
     
-    func setEven(_ to: Bool)
 }
 
 class TimetablePresenter: TimetablePresenterProtocol {
@@ -47,57 +46,39 @@ class TimetablePresenter: TimetablePresenterProtocol {
     var router: TimetableRouterProtocol!
     
     var weekCount: Int {
-        
-        guard let weekCells = weeksCells[interactor!.even] else { return 0 }
-        
-        return weekCells.count
-        
+        return interactor.weekCount
     }
     
-    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] {
-        get {
-            return interactor!.weeksCells
-        }
-    }
-    
-    var actualEven: Bool! {
+    var currentWeekType: WeekType! {
         
         set {
-            interactor.actualEven = newValue
+            interactor.currentWeekType = newValue
         }
         
         get {
-            return interactor.actualEven
+            return interactor.currentWeekType
         }
         
     }
     
-    func dayCell(atIndex: IndexPath) -> TimetableDayCollectionViewCell? {
-        
-        guard let weekCells = weeksCells[interactor.even] else { return nil }
-        
-        guard let dayCell = weekCells[atIndex.item] else {
-            return nil
-        }
-        
-        return dayCell
-        
+    func setWeekType(_ to: WeekType) {
+        interactor.setWeekType(to)
+    }
+    
+    func weekdayFrame(atIndex: Int) -> TimetableWeekdayCollectionViewCell? {
+        return interactor.weekdayFrame(atIndex: atIndex)
     }
 
-    func sizeForDayCell(atIndex: IndexPath) -> CGSize {
+    func sizeForWeekdayCell(atIndex: Int) -> CGSize {
         
-        guard let weekCells = weeksCells[interactor.even] else { return CGSize.zero }
+        guard let weekdayFrame = weekdayFrame(atIndex: atIndex) else { return CGSize.zero }
         
-        guard let dayCell = weekCells[atIndex.item] else {
-            return CGSize.zero
-        }
-        
-        return dayCell.frame.size
+        return weekdayFrame.frame.size
         
     }
     
-    func updateActiveDayCell(toIndex: Int) {
-        interactor.updateActiveDayCell(toIndex: toIndex)
+    func updateActiveWeekdayCell(toIndex: Int) {
+        interactor.updateActiveWeekdayCell(toIndex: toIndex)
     }
     
     func lessonsCount(atSection: Int, atDay: Int) -> Int {
@@ -148,10 +129,6 @@ class TimetablePresenter: TimetablePresenterProtocol {
         return interactor.dayScrollOffset(atIndex: atIndex)
     }
     
-    func setEven(_ to: Bool) {
-        interactor.setEven(to)
-    }
-    
     required init(view: TimetableViewProtocol) {
         self.view = view
     }
@@ -159,17 +136,29 @@ class TimetablePresenter: TimetablePresenterProtocol {
     func configureView() {
         interactor.apiService.isEven { (e) in
             
-            self.actualEven = e
+            let weekType = e ? WeekType.even : WeekType.odd
             
-            self.view.renderTableViewImages(even: e, {
+            let date = Date()
+            
+            var calendar = Calendar.current
+                calendar.locale = Locale(identifier: "ru_RU")
+            
+            let weekday = calendar.component(.weekday, from: date)
+            
+            self.currentWeekType = ( weekday != 1 && weekday != 7 ) ? weekType : !weekType // if not 1 - Sunday and 7 - Saturday
+            
+            self.setWeekType(self.currentWeekType)
+            
+            self.view.renderTableViewImages(weekType: weekType, {
                 
-                self.view.renderSegmentedControl(even: e)
+//                let wd = ( weekday != 1 && weekday != 7 ) ? weekday - 1 : 1
+//
+//                self.view.changeDay(toIndex: wd, animated: false, prevTransform: CGAffineTransform(), nextTransform: CGAffineTransform())
+                
+                self.view.createPanGestureRecognizer()
                 
             })
             
         }
-        view.reloadWeekCollectionData(animated: true, {})
-        view.renderWeekCollectionViewBorder()
-        view.createPanGestureRecognizer()
     }
 }

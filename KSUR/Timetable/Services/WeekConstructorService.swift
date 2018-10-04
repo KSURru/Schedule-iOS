@@ -12,110 +12,120 @@ protocol WeekConstructorServiceProtocol {
     
     var activeCell: Int { get set }
     
-    var even: Bool { get set }
-    func setEven(_ to: Bool)
+    var weeks: [WeekPeriod: [Weekday]] { get set }
     
-    var weeks: [Bool: [Day]] { get set }
-    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] { get set }
+    func weekCount(weekPeriod: WeekPeriod) -> Int
     
-    func day(atIndex: Int, even: Bool) -> Day?
-    func dayCell(atIndex: Int, isActive: Bool, even: Bool) -> TimetableDayCollectionViewCell?
+    func weekday(atIndex: Int, weekPeriod: WeekPeriod) -> Weekday?
+    func weekdayCell(atIndex: Int, isActive: Bool, weekPeriod: WeekPeriod) -> TimetableWeekdayCollectionViewCell?
+    func weekdayFrame(atIndex: Int, weekPeriod: WeekPeriod) -> TimetableWeekdayCollectionViewCell?
     
     func constructCells(active: Int)
-    func updateActiveCell(toIndex: Int)
+    func updateActiveCell(toIndex: Int, weekPeriod: WeekPeriod)
+    
 }
 
 class WeekConstructorService: WeekConstructorServiceProtocol {
     
     var activeCell = 0
     
-    var even: Bool = false
+    var weeks = [WeekPeriod: [Weekday]]()
     
-    func setEven(_ to: Bool) {
-        even = to
+    func weekCount(weekPeriod: WeekPeriod) -> Int {
+        
+        guard let weeks = weeks[weekPeriod] else { return 0 }
+        
+        return weeks.count
+        
     }
     
-    var weeksCells: [Bool: [Int: TimetableDayCollectionViewCell]] = [:]
-    
-    var weeks = [Bool: [Day]]()
-    
-    func day(atIndex: Int, even: Bool) -> Day? {
+    func weekday(atIndex: Int, weekPeriod: WeekPeriod) -> Weekday? {
         
-        guard let week = weeks[even] else { return nil }
+        guard let week = weeks[weekPeriod] else { return nil }
         
         if week.indices.contains(atIndex) {
+            
             return week[atIndex]
+            
         } else {
+            
             return nil
+            
         }
+        
     }
     
-    func dayCell(atIndex: Int, isActive: Bool, even: Bool) -> TimetableDayCollectionViewCell? {
+    func weekdayCell(atIndex: Int, isActive: Bool, weekPeriod: WeekPeriod) -> TimetableWeekdayCollectionViewCell? {
         
-        guard let day = self.day(atIndex: atIndex, even: even) else {
-            return nil
-        }
+        guard let weekday = self.weekday(atIndex: atIndex, weekPeriod: weekPeriod) else { return nil }
         
         let activeTextColor = UIColor(red: 0, green: 0.869, blue: 0.717, alpha: 1)
         
-        let titleLabel = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: day.title.width(withConstrainedHeight: 16, font: .systemFont(ofSize: 13, weight: .bold)), height: 16)))
-        titleLabel.text = day.title
+        let titleLabel = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: weekday.title.width(withConstrainedHeight: 16, font: .systemFont(ofSize: 13, weight: .bold)), height: 16)))
+        titleLabel.text = weekday.title
         titleLabel.font = .systemFont(ofSize: 13, weight: .bold)
         titleLabel.textColor = isActive ? activeTextColor : .white
         
-        let dateLabel = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 35), size: CGSize(width: day.date.width(withConstrainedHeight: 17, font: .systemFont(ofSize: 14)), height: 17)))
-        dateLabel.text = day.date
+        let dateLabel = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 35), size: CGSize(width: weekday.date.width(withConstrainedHeight: 17, font: .systemFont(ofSize: 14)), height: 17)))
+        dateLabel.text = weekday.date
         dateLabel.font = .systemFont(ofSize: 14)
         dateLabel.textColor = isActive ? activeTextColor : .white
         
         let width = titleLabel.frame.size.width > dateLabel.frame.size.width ? titleLabel.frame.size.width : dateLabel.frame.size.width
         
-        let dayCell = TimetableDayCollectionViewCell()
+        let weekdayCell = TimetableWeekdayCollectionViewCell()
         
-        dayCell.frame.size = CGSize(width: width + 32, height: 68)
-        dayCell.backgroundColor = UIColor(white: 0.05, alpha: 1)
+        weekdayCell.frame.size = CGSize(width: width + 32, height: 68)
+        weekdayCell.backgroundColor = UIColor(white: 0.05, alpha: 1)
         
-        dayCell.titleLabel = titleLabel
-        dayCell.dateLabel = dateLabel
+        weekdayCell.titleLabel = titleLabel
+        weekdayCell.dateLabel = dateLabel
         
-        dayCell.addSubview(titleLabel)
-        dayCell.addSubview(dateLabel)
-        dayCell.isUserInteractionEnabled = false
+        weekdayCell.addSubview(titleLabel)
+        weekdayCell.addSubview(dateLabel)
+        weekdayCell.isUserInteractionEnabled = false
         
-        return dayCell
+        return weekdayCell
+    }
+    
+    func weekdayFrame(atIndex: Int, weekPeriod: WeekPeriod) -> TimetableWeekdayCollectionViewCell? {
+        guard let weekday = weekday(atIndex: atIndex, weekPeriod: weekPeriod) else { return nil }
+        
+        return weekday.frame
+        
     }
     
     func constructCells(active: Int) {
         
-        for week in weeks {
+        for w in weeks {
             
             var i = 0
             
-            let e = week.key
+            let weekPeriod = w.key
             
-            var wc = [Int: TimetableDayCollectionViewCell]()
+            guard let week = weeks[weekPeriod] else { return }
             
-            for _ in week.value {
+            for _ in w.value {
                 
-                wc[i] = dayCell(atIndex: i, isActive: (i == active ? true : false), even: e)
+                guard let weekdayCell = weekdayCell(atIndex: i, isActive: (i == active ? true : false), weekPeriod: weekPeriod) else { return }
+                
+                week[i].frame = weekdayCell
                 
                 i += 1
                 
             }
             
-            weeksCells[e] = wc
-            
         }
     }
     
-    func updateActiveCell(toIndex: Int) {
+    func updateActiveCell(toIndex: Int, weekPeriod: WeekPeriod) {
         
         if toIndex != activeCell {
             
-            guard var weekCells = weeksCells[self.even] else { return }
+            guard var week = weeks[weekPeriod] else { return }
             
-            weekCells[activeCell] = self.dayCell(atIndex: activeCell, isActive: false, even: self.even)
-            weekCells[toIndex] = self.dayCell(atIndex: toIndex, isActive: true, even: self.even)
+            week[activeCell].frame = self.weekdayCell(atIndex: activeCell, isActive: false, weekPeriod: weekPeriod)
+            week[toIndex].frame = self.weekdayCell(atIndex: toIndex, isActive: true, weekPeriod: weekPeriod)
             
             activeCell = toIndex
             
@@ -130,30 +140,35 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
         var startDate = Date()
         var interval: TimeInterval = 0
         
-        if Calendar.current.dateInterval(of: .weekOfYear, start: &startDate, interval: &interval, for: now) {
+        var calendar = Calendar.current
+            calendar.locale = Locale(identifier: "ru_RU")
+        
+        if calendar.dateInterval(of: .weekOfYear, start: &startDate, interval: &interval, for: now) {
             
-            var actualWeek = [Day]()
-            var nextWeek = [Day]()
+            var currentWeek = [Weekday]()
+            var nextWeek = [Weekday]()
+            
+            let titleFormatter : DateFormatter = DateFormatter()
+            titleFormatter.locale = Locale(identifier: "ru_RU")
+            titleFormatter.dateFormat = "EEEE" // ex. Monday
+            
+            let dateFormatter : DateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ru_RU")
+            dateFormatter.dateFormat = "dd MMM" // ex. 17 Sep
             
             var i = 0
             
             while i < 5 {
                 
-                let titleFormatter : DateFormatter = DateFormatter()
-                titleFormatter.dateFormat = "EEEE" // ex. Monday
-                
-                let dateFormatter : DateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd MMM" // ex. 17 Sep
-                
                 guard let date = Calendar.current.date(byAdding: .day, value: +i, to: startDate) else { return }
                 let dateString = dateFormatter.string(from: date)
-                let titleString = titleFormatter.string(from: date)
+                let titleString = titleFormatter.string(from: date).capitalized
                 
-                let d = Day(titleString, date: dateString)
+                let wd = Weekday(titleString, date: dateString)
                 
                 
                 
-                 actualWeek.append(d)
+                 currentWeek.append(wd)
                 
                 i += 1
                 
@@ -163,28 +178,22 @@ class WeekConstructorService: WeekConstructorServiceProtocol {
             
             while i < 12 {
                 
-                let titleFormatter : DateFormatter = DateFormatter()
-                titleFormatter.dateFormat = "EEEE" // ex. Monday
-                
-                let dateFormatter : DateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd MMM" // ex. 17 Sep
-                
                 guard let date = Calendar.current.date(byAdding: .day, value: +i, to: startDate) else { return }
                 let dateString = dateFormatter.string(from: date)
-                let titleString = titleFormatter.string(from: date)
+                let titleString = titleFormatter.string(from: date).capitalized
                 
-                let d = Day(titleString, date: dateString)
+                let wd = Weekday(titleString, date: dateString)
                 
                 
                 
-                nextWeek.append(d)
+                nextWeek.append(wd)
                 
                 i += 1
                 
             }
             
-            weeks[self.even] = actualWeek
-            weeks[!self.even] = nextWeek
+            weeks[.current] = currentWeek
+            weeks[.next] = nextWeek
             
             self.constructCells(active: activeCell)
             

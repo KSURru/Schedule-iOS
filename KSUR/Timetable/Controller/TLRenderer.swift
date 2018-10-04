@@ -10,17 +10,50 @@ import UIKit
 
 protocol TimetableRendererProtocol {
     
+    func renderDayTableView(_ completion: @escaping (() -> Void))
+    func renderWeekCollectionView(_ completion: @escaping (() -> Void))
     func renderWeekCollectionViewBorder()
-    
-    func renderSegmentedControl(even: Bool)
+    func renderSegmentedControl(weekType: WeekType)
     
     func renderDayImage(from dayId: Int, to endDayId: Int, inversed: Bool, _ completion: @escaping (() -> Void))
-    func renderWeekImages(even: Bool, _ completion: @escaping (() -> Void))
-    func renderTableViewImages(even: Bool, _ completion: @escaping (() -> Void))
+    func renderWeekImages(weekType: WeekType, _ completion: @escaping (() -> Void))
+    func renderTableViewImages(weekType: WeekType, _ completion: @escaping (() -> Void))
     
 }
 
 extension TimetableViewController: TimetableRendererProtocol {
+    
+    func renderDayTableView(_ completion: @escaping (() -> Void)) {
+        
+        dayTableView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8).translatedBy(x: 0, y: 400)
+        dayTableView.alpha = 0
+        
+        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { (_) in
+            
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
+                
+                self.dayTableView.transform = CGAffineTransform(scaleX: 1, y: 1).translatedBy(x: 0, y: 0)
+                self.dayTableView.alpha = 1
+                
+            }) { (_) in completion() }
+            
+        }
+        
+    }
+    
+    func renderWeekCollectionView(_ completion: @escaping (() -> Void)) {
+        
+        weekCollectionView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2).translatedBy(x: 0, y: -self.weekCollectionView.frame.size.height)
+        weekCollectionView.alpha = 0
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
+            
+            self.weekCollectionView.transform = CGAffineTransform(scaleX: 1, y: 1).translatedBy(x: 0, y: 0)
+            self.weekCollectionView.alpha = 1
+            
+        }) { (_) in completion() }
+        
+    }
     
     func renderWeekCollectionViewBorder() {
         
@@ -35,7 +68,7 @@ extension TimetableViewController: TimetableRendererProtocol {
         
     }
     
-    func renderSegmentedControl(even: Bool) {
+    func renderSegmentedControl(weekType: WeekType) {
         
         evenSegmented.removeAllSegments()
         
@@ -44,7 +77,7 @@ extension TimetableViewController: TimetableRendererProtocol {
         evenSegmented.insertSegment(withTitle: "Нечетная", at: 0, animated: true)
         evenSegmented.insertSegment(withTitle: "Четная", at: 1, animated: true)
         
-        evenSegmented.selectedSegmentIndex = even ? 1 : 0
+        evenSegmented.selectedSegmentIndex = weekType.bool ? 1 : 0
         
     }
     
@@ -62,9 +95,7 @@ extension TimetableViewController: TimetableRendererProtocol {
                 
                 let nextDayId = inversed ? dayId - 1 : dayId + 1
                 
-                self.renderDayImage(from: nextDayId, to: endDayId, inversed: inversed, {
-                    completion()
-                })
+                self.renderDayImage(from: nextDayId, to: endDayId, inversed: inversed, { completion() })
                 
             })
             
@@ -72,43 +103,41 @@ extension TimetableViewController: TimetableRendererProtocol {
         
     }
     
-    func renderWeekImages(even: Bool, _ completion: @escaping (() -> Void)) {
+    func renderWeekImages(weekType: WeekType, _ completion: @escaping (() -> Void)) {
         
         dayTableView.transform = CGAffineTransform(translationX: dayTableView.frame.size.width, y: 0)
         self.view.isUserInteractionEnabled = false
         
-        presenter.setEven(even)
+        presenter.setWeekType(weekType)
         
-        renderDayImage(from: presenter.weekCount, to: 0, inversed: true) {
-            completion()
-        }
+        renderDayImage(from: presenter.weekCount, to: 0, inversed: true) { completion() }
         
     }
     
-    func renderTableViewImages(even: Bool, _ completion: @escaping (() -> Void)) {
+    func renderTableViewImages(weekType: WeekType, _ completion: @escaping (() -> Void)) {
         
         DispatchQueue.main.async {
             
-            self.renderWeekImages(even: !even) {
+            self.renderWeekImages(weekType: !weekType) {
                 
-                self.renderWeekImages(even: even, {
+                self.renderWeekImages(weekType: weekType, {
                     
-                    self.dayTableView.alpha = 0
-                    self.dayTableView.transform = CGAffineTransform(translationX: 0, y: 0)
+                    self.loaderView.stopAnimating()
                     
-                    UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+                    self.reloadWeekCollectionData(animated: false, {})
+                    self.renderWeekCollectionViewBorder()
+                    
+                    self.renderWeekCollectionView({})
+                    
+                    self.renderDayTableView {
                         
-                        self.dayTableView.alpha = 1
-                        self.loaderView.alpha = 0
-                        
-                    }, completion: { (_) in
-                        
-                        self.loaderView.stopAnimating()
                         self.view.isUserInteractionEnabled = true
                         
                         completion()
                         
-                    })
+                    }
+                    
+                    self.renderSegmentedControl(weekType: weekType)
                     
                 })
                 

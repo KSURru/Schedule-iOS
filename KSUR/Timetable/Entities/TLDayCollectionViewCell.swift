@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TimetableDayCollectionViewCell: UICollectionViewCell {
+class TimetableWeekdayCollectionViewCell: UICollectionViewCell {
     
     var titleLabel: UILabel!
     var dateLabel: UILabel!
